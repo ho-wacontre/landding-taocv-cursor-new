@@ -7,15 +7,16 @@
     <title>Tạo CV Chuyên Nghiệp | Viecoi</title>
     <meta name="description"
         content="Tạo CV chuyên nghiệp chỉ trong 5 phút. Gây ấn tượng với nhà tuyển dụng bằng các mẫu CV được thiết kế chỉn chu, rõ ràng.">
-    <link rel="stylesheet" href="style.css?v=5">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=6">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- HEADER -->
     <header class="header">
-        <div class="header-container">
+        <div class="header-container container">
             <div class="header-left">
                 <a href="#" class="logo-group">
                     <span class="logo-text">Viecoi</span>
@@ -62,10 +63,9 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION – Figma 897-17078 Frame 427321848 -->
     <section class="hero">
-        <div class="hero-bg-image"></div>
-        <div class="hero-container">
+        <div class="hero-container container">
             <div class="hero-wrapper">
                 <div class="hero-content">
                     <h1 class="hero-title">
@@ -74,121 +74,157 @@
                     </h1>
                     <p class="hero-desc">Gây ấn tượng mạnh với nhà tuyển dụng chỉ trong vài giây đầu tiên bằng một bản
                         CV được thiết kế chỉn chu, rõ ràng và nổi bật.</p>
-                    <a href="#" class="btn-hero">Xem thêm mẫu CV</a>
+                    <a href="#" class="btn-hero btn-hero-desktop">Xem thêm mẫu CV</a>
                 </div>
                 <div class="hero-banner">
-                    <!-- Right-side graphic element placeholder for CV cards preview -->
+                    <img src="./assets/hero-mobile.svg" alt="Mẫu CV" class="hero-banner-mobile" width="361" height="248" loading="eager">
+                    <div class="hero-banner-inner">
+                        <img src="./assets/hero-right-side.svg" alt="Mẫu CV" class="hero-right-image hero-banner-default" width="555" height="332" loading="eager">
+                        <img src="./assets/hero-right-side-hover.svg" alt="" class="hero-right-image hero-banner-hover" width="555" height="332" loading="lazy">
+                    </div>
                 </div>
+                <a href="#" class="btn-hero btn-hero-mobile">Xem thêm mẫu CV</a>
             </div>
         </div>
     </section>
 
     <!-- CV TEMPLATES SECTION -->
     <section class="cv-templates">
-        <div class="testimo-wrapper"> <!-- Reusing testimo-wrapper for width/centering -->
-            <div class="testimo-header" style="text-align: center; margin-bottom: 48px;">
-                <h2 class="template-title" style="margin-bottom: 16px;">Mẫu CV Xin Việc</h2>
-                <p class="features-desc" style="max-width: 700px; margin: 0 auto; color: var(--gray-500);">Khám phá kho
-                    mẫu CV chuyên nghiệp, chuẩn bố cục tuyển dụng, sẵn sàng cho mọi vị trí ứng tuyển.</p>
+        <div class="template-section-wrapper container">
+            <div class="template-header-block">
+                <h2 class="template-title">Mẫu CV Xin Việc</h2>
+                <p class="template-desc">Khám phá kho mẫu CV chuyên nghiệp, chuẩn bố cục tuyển dụng, sẵn sàng cho mọi vị trí ứng tuyển.</p>
             </div>
 
             <div class="templates-grid">
                 <!-- Template Item 1 -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <div class="template-placeholder template-teal">
-                            <div class="placeholder-skeleton"></div>
-                        </div>
+                        <img src="assets/cv-template-1.png" alt="Mẫu tiêu chuẩn" class="template-img">
                         <div class="template-actions">
-                            <a href="#" class="btn btn-primary">Dùng mẫu này</a>
+                            <a href="#" class="btn btn-primary">Sử dụng mẫu này</a>
                         </div>
                     </div>
                     <div class="template-info">
                         <span class="template-name">Mẫu tiêu chuẩn</span>
                         <span class="badge-free">Free</span>
                     </div>
+                    <a href="#" class="btn btn-primary template-card-btn-mobile">Sử dụng mẫu này</a>
                 </div>
 
                 <!-- Template Item 2 -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <div class="template-placeholder template-blue">
-                            <div class="placeholder-skeleton"></div>
-                        </div>
+                        <img src="assets/cv-template-2.png" alt="Mẫu sáng tạo" class="template-img">
                         <div class="template-actions">
-                            <a href="#" class="btn btn-primary">Dùng mẫu này</a>
+                            <a href="#" class="btn btn-primary">Sử dụng mẫu này</a>
                         </div>
                     </div>
                     <div class="template-info">
                         <span class="template-name">Mẫu sáng tạo</span>
                         <span class="badge-free">Free</span>
                     </div>
+                    <a href="#" class="btn btn-primary template-card-btn-mobile">Sử dụng mẫu này</a>
                 </div>
 
                 <!-- Template Item 3 -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <div class="template-placeholder template-gray">
-                            <div class="placeholder-skeleton"></div>
-                        </div>
+                        <img src="assets/cv-template-3.png" alt="Mẫu tối giản" class="template-img">
                         <div class="template-actions">
-                            <a href="#" class="btn btn-primary">Dùng mẫu này</a>
+                            <a href="#" class="btn btn-primary">Sử dụng mẫu này</a>
                         </div>
                     </div>
                     <div class="template-info">
                         <span class="template-name">Mẫu tối giản</span>
                         <span class="badge-free">Free</span>
                     </div>
+                    <a href="#" class="btn btn-primary template-card-btn-mobile">Sử dụng mẫu này</a>
                 </div>
 
                 <!-- Template Item 4 -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <div class="template-placeholder template-dark">
-                            <div class="placeholder-skeleton"></div>
-                        </div>
+                        <img src="assets/cv-template-4.png" alt="Mẫu công nghệ" class="template-img">
                         <div class="template-actions">
-                            <a href="#" class="btn btn-primary">Dùng mẫu này</a>
+                            <a href="#" class="btn btn-primary">Sử dụng mẫu này</a>
                         </div>
                     </div>
                     <div class="template-info">
                         <span class="template-name">Mẫu công nghệ</span>
                         <span class="badge-free">Free</span>
                     </div>
+                    <a href="#" class="btn btn-primary template-card-btn-mobile">Sử dụng mẫu này</a>
+                </div>
+
+                <!-- Template Item 5 -->
+                <div class="template-card">
+                    <div class="template-preview">
+                        <img src="assets/cv-template-5.png" alt="Mẫu hiện đại" class="template-img">
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-primary">Sử dụng mẫu này</a>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <span class="template-name">Mẫu hiện đại</span>
+                        <span class="badge-free">Free</span>
+                    </div>
+                    <a href="#" class="btn btn-primary template-card-btn-mobile">Sử dụng mẫu này</a>
+                </div>
+
+                <!-- Template Item 6 -->
+                <div class="template-card">
+                    <div class="template-preview">
+                        <img src="assets/cv-template-6.png" alt="Mẫu kinh doanh" class="template-img">
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-primary">Sử dụng mẫu này</a>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <span class="template-name">Mẫu kinh doanh</span>
+                        <span class="badge-free">Free</span>
+                    </div>
+                    <a href="#" class="btn btn-primary template-card-btn-mobile">Sử dụng mẫu này</a>
                 </div>
             </div>
 
-            <div style="margin-top: 56px; text-align: center;">
-                <a href="#" class="btn btn-outline btn-large">Xem thêm mẫu CV</a>
+            <div class="template-cta-wrapper">
+                <a href="#" class="btn btn-green btn-large">Xem thêm mẫu CV</a>
             </div>
         </div>
     </section>
 
-    <!-- FEATURES SECTION -->
+    <!-- FEATURES SECTION (Figma 867:17227) -->
     <section class="features">
-        <div class="features-wrapper">
+        <div class="features-inner">
+            <div class="features-pattern" aria-hidden="true"><img src="assets/features-pattern.svg" alt=""></div>
+            <div class="features-wrapper container">
             <div class="features-header">
                 <div class="features-badge">
-                    <span class="badge-dot"></span> Chỉ có ở TaoCV
+                    <img src="assets/features-badge-icon.svg" alt="" class="features-badge-icon" width="8" height="8"> Chỉ có ở TaoCV
                 </div>
                 <h2 class="features-title">Tạo CV dễ dàng với đầy đủ tiện ích bạn cần</h2>
             </div>
 
             <div class="features-grid">
-                <!-- Top Row: 3 Vertical Cards -->
+                <!-- Top Row: 3 Vertical Cards (364x374, gap 8px, padding 8px) -->
                 <div class="features-row-3">
                     <div class="feature-card feature-vertical">
                         <div class="feature-card-effect"></div>
-                        <div class="feature-img-placeholder"></div>
+                        <div class="feature-card-img feature-card-img--float">
+                            <img src="assets/feature-card-img-1.svg" alt="Tùy chỉnh linh hoạt" class="feature-card-img-inner" width="348" height="209">
+                        </div>
                         <div class="feature-content">
                             <h3 class="feature-heading">Tùy chỉnh linh hoạt</h3>
-                            <p class="feature-desc">Tự do chỉnh sửa mọi nội dung và bố cục để phù hợp với phong cách cá
-                                nhân và ngành nghề của bạn.</p>
+                            <p class="feature-desc">Tự do chỉnh sửa mọi nội dung và bố cục để phù hợp với phong cách cá nhân và ngành nghề của bạn.</p>
                         </div>
                     </div>
                     <div class="feature-card feature-vertical">
                         <div class="feature-card-effect"></div>
-                        <div class="feature-img-placeholder"></div>
+                        <div class="feature-card-img">
+                            <img src="assets/feature-card-img-2.svg" alt="Kho mẫu CV chuyên nghiệp" class="feature-card-img-inner" width="348" height="211">
+                            <img src="assets/feature-card-img-2-hover.svg" alt="" class="feature-card-img-hover" width="336" height="214" aria-hidden="true">
+                        </div>
                         <div class="feature-content">
                             <h3 class="feature-heading">Kho mẫu CV chuyên nghiệp</h3>
                             <p class="feature-desc">Hàng ngàn mẫu CV được thiết kế sẵn bởi các chuyên gia nhân sự.</p>
@@ -196,53 +232,61 @@
                     </div>
                     <div class="feature-card feature-vertical">
                         <div class="feature-card-effect"></div>
-                        <div class="feature-img-placeholder"></div>
+                        <div class="feature-card-img feature-card-img--card3">
+                            <img src="assets/feature-card-img-3.svg" alt="Tải nhanh - xuất file chuẩn" class="feature-card-img-inner" width="348" height="209">
+                            <img src="assets/feature-card-img-3-hover.svg" alt="" class="feature-card-img-hover" width="320" height="185" aria-hidden="true">
+                        </div>
                         <div class="feature-content">
                             <h3 class="feature-heading">Tải nhanh - xuất file chuẩn</h3>
-                            <p class="feature-desc">Xuất file PDF chất lượng cao nhất mà không lo vỡ nét hay lỗi font.
-                            </p>
+                            <p class="feature-desc">Xuất file PDF chất lượng cao nhất mà không lo vỡ nét hay lỗi font.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bottom Row: 2 Horizontal Cards -->
+                <!-- Bottom Row: 2 Horizontal Cards (558x134, gap 24px, padding 24px) -->
                 <div class="features-row-2">
                     <div class="feature-card feature-horizontal">
-                        <!-- <div class="feature-card-effect"></div> -->
-                        <div class="feature-content">
+                        <div class="feature-card-effect-h"></div>
+                        <div class="feature-card-leftSide">
                             <h3 class="feature-heading">Thay đổi màu sắc CV</h3>
-                            <p class="feature-desc">Bạn có thể thay đổi màu sắc của CV bạn đang sử dụng tuỳ vào sở thích
-                                cá nhân.</p>
+                            <p class="feature-desc">Bạn có thể thay đổi màu sắc của CV bạn đang sử dụng tuỳ vào sở thích cá nhân.</p>
                         </div>
-                        <div class="feature-img-side-placeholder"></div>
+                        <div class="feature-card-rightSide">
+                            <img src="assets/feature-card-rightSide-1.svg" alt="" class="rightSide-default" width="127" height="70">
+                            <img src="assets/feature-card-rightSide-1-hover.svg" alt="" class="rightSide-hover" width="127" height="85" aria-hidden="true">
+                        </div>
                     </div>
                     <div class="feature-card feature-horizontal">
-                        <!-- <div class="feature-card-effect"></div> -->
-                        <div class="feature-content">
+                        <div class="feature-card-effect-h"></div>
+                        <div class="feature-card-leftSide">
                             <h3 class="feature-heading">Tuỳ chỉnh chữ</h3>
                             <p class="feature-desc">Tùy chỉnh kiểu chữ, kích thước chữ để phù hợp phong cách riêng.</p>
                         </div>
-                        <div class="feature-img-side-placeholder"></div>
+                        <div class="feature-card-rightSide">
+                            <img src="assets/feature-card-rightSide-2.svg" alt="" class="rightSide-default" width="127" height="77">
+                            <img src="assets/feature-card-rightSide-2-hover.svg" alt="" class="rightSide-hover" width="127" height="77" aria-hidden="true">
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
     <!-- STEPS SECTION -->
     <section class="steps">
-        <div class="steps-wrapper">
+        <div class="steps-wrapper container">
             <div class="steps-left-side">
                 <h2 class="steps-title">
                     Tạo CV chuyên nghiệp Chỉ với <span class="text-gradient">3 bước đơn giản</span>
                 </h2>
                 <div class="stepper-wrapper">
                     <div class="stepper-line">
-                        <!-- Abstracted placeholder for line -->
+                        <div class="stepper-line-fill" aria-hidden="true"></div>
                     </div>
                     <div class="stepper-content">
                         <!-- Step 1 -->
-                        <div class="step-item step-active">
+                        <div class="step-item step-active" data-step="1" role="button" tabindex="0">
                             <div class="step-number bg-gradient-brand">
                                 <span>Bước 1</span>
                             </div>
@@ -253,7 +297,7 @@
                             </div>
                         </div>
                         <!-- Step 2 -->
-                        <div class="step-item step-inactive">
+                        <div class="step-item step-inactive" data-step="2" role="button" tabindex="0">
                             <div class="step-number bg-gray">
                                 <span>Bước 2</span>
                             </div>
@@ -264,7 +308,7 @@
                             </div>
                         </div>
                         <!-- Step 3 -->
-                        <div class="step-item step-inactive">
+                        <div class="step-item step-inactive" data-step="3" role="button" tabindex="0">
                             <div class="step-number bg-gray">
                                 <span>Bước 3</span>
                             </div>
@@ -278,92 +322,81 @@
                 </div>
             </div>
             <div class="steps-right-side">
-                <div class="steps-right-bg"></div>
-                <!-- Interactive decorations would go here as absolute positioned elements -->
+                <div class="steps-right-images">
+                    <img src="assets/steps-right-step1.svg" alt="" class="steps-right-img steps-right-img--active" data-step-img="1" width="555" height="633">
+                    <img src="assets/steps-right-step2.svg" alt="" class="steps-right-img" data-step-img="2" width="555" height="633">
+                    <img src="assets/steps-right-step3.svg" alt="" class="steps-right-img" data-step-img="3" width="555" height="633">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SOCIAL PROOF / TESTIMONIALS -->
+    <!-- CALL TO ACTION (APP PROMO) – Figma 1076-17962: bannerApp_left = code, bannerApp_right = SVG -->
+    <section class="banner-app-container">
+        <div class="bannerApp_wrapper container">
+            <div class="bannerApp_left">
+                    <div class="bannerApp_content">
+                        <h2 class="bannerApp_title">Tải Ứng Dụng</h2>
+                        <p class="bannerApp_desc">Tải ngay ứng dụng Resume Marker – sở hữu bản CV chuyên nghiệp mọi lúc, mọi nơi, chỉ với vài thao tác đơn giản!</p>
+                    </div>
+                    <div class="download_button-wrapper">
+                        <a href="#" class="banner-download-btn" aria-label="Tải trên App Store">
+                            <img src="assets/banner-app-appstore.png" alt="Download on the App Store" width="179" height="60">
+                        </a>
+                        <a href="#" class="banner-download-btn" aria-label="Tải trên Google Play">
+                            <img src="assets/banner-app-googleplay.png" alt="GET IT ON Google Play" width="201" height="60">
+                        </a>
+                    </div>
+                </div>
+                <div class="bannerApp_right">
+                    <img src="assets/banner-app-right.svg" alt="" width="555" height="340" class="bannerApp_right-img">
+                </div>
+            </div>
+    </section>
+
+    <!-- SOCIAL PROOF (TESTIMONIALS) – Figma 869-17255 -->
     <section class="testimonials">
-        <div class="testimo-wrapper">
-            <h2 class="testimo-title">
-                Khách hàng đã nói gì về <span class="text-gradient">chúng tôi</span>
-            </h2>
+        <div class="testimo-wrapper container">
+            <h2 class="testimo-title">Khách hàng đã nói gì về <span class="testimo-title-gradient">chúng tôi</span></h2>
             <div class="testimo-grid">
-                <!-- Card 1 -->
                 <div class="testimo-card">
                     <div class="testimo-content">
-                        <div class="quote-icon">
-                            <!-- Placeholder for quote icon -->
-                        </div>
-                        <p class="testimo-text">Mình không rành thiết kế nhưng vẫn tạo được một CV rất chuyên nghiệp.
-                            Giao diện dễ dùng, chỉnh sửa trực tiếp cực kỳ tiện.</p>
+                        <img src="assets/testimo-quote.svg" alt="" class="testimo-quote-icon" width="32" height="28">
+                        <p class="testimo-text">Mình không rành thiết kế nhưng vẫn tạo được một CV rất chuyên nghiệp. Giao diện dễ dùng, chỉnh sửa trực tiếp cực kỳ tiện.</p>
                     </div>
                     <div class="testimo-info">
-                        <div class="author-avatar bg-gray"></div>
+                        <img src="assets/testimo-avatar-1.png" alt="" class="author-avatar" width="58" height="58">
                         <div class="author-details">
                             <h4 class="author-name">Nguyen Van Hau</h4>
                             <p class="author-role">Developer</p>
                         </div>
                     </div>
                 </div>
-                <!-- Card 2 -->
                 <div class="testimo-card">
                     <div class="testimo-content">
-                        <div class="quote-icon">
-                            <!-- Placeholder for quote icon -->
-                        </div>
-                        <p class="testimo-text">Các mẫu CV ở đây rất hợp với ngành sáng tạo. Mình chỉ cần chọn layout,
-                            chỉnh font một chút là có thể gửi nhà tuyển dụng ngay.</p>
+                        <img src="assets/testimo-quote.svg" alt="" class="testimo-quote-icon" width="32" height="28">
+                        <p class="testimo-text">Các mẫu CV ở đây rất hợp với ngành sáng tạo. Mình chỉ cần chọn layout, chỉnh font một chút là có thể gửi nhà tuyển dụng ngay.</p>
                     </div>
                     <div class="testimo-info">
-                        <div class="author-avatar bg-gray"></div>
+                        <img src="assets/testimo-avatar-2.png" alt="" class="author-avatar" width="58" height="58">
                         <div class="author-details">
                             <h4 class="author-name">Tran Minh Tuan</h4>
                             <p class="author-role">Nhân viên kế toán</p>
                         </div>
                     </div>
                 </div>
-                <!-- Card 3 -->
                 <div class="testimo-card">
                     <div class="testimo-content">
-                        <div class="quote-icon">
-                            <!-- Placeholder for quote icon -->
-                        </div>
-                        <p class="testimo-text">Không cần tải phần mềm hay dùng Figma, mình làm CV trực tiếp trên web,
-                            xuất PDF siêu nhanh. Rất tiết kiệm thời gian.</p>
+                        <img src="assets/testimo-quote.svg" alt="" class="testimo-quote-icon" width="32" height="28">
+                        <p class="testimo-text">Không cần tải phần mềm hay dùng Figma, mình làm CV trực tiếp trên web, xuất PDF siêu nhanh. Rất tiết kiệm thời gian.</p>
                     </div>
                     <div class="testimo-info">
-                        <div class="author-avatar bg-gray"></div>
+                        <img src="assets/testimo-avatar-3.png" alt="" class="author-avatar" width="58" height="58">
                         <div class="author-details">
                             <h4 class="author-name">Mai Thi Lan</h4>
                             <p class="author-role">Marketing</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CALL TO ACTION (APP PROMO) -->
-    <section class="banner-app">
-        <div class="banner-app-container">
-            <div class="banner-app-wrapper">
-                <div class="banner-app-left">
-                    <div class="banner-app-content">
-                        <p class="banner-app-title">Tải Ứng Dụng</p>
-                        <p class="banner-app-desc">Tải ngay ứng dụng Resume Marker – sở hữu bản CV chuyên nghiệp mọi
-                            lúc, mọi nơi, chỉ với vài thao tác đơn giản!</p>
-                    </div>
-                    <div class="download-button-wrapper">
-                        <div class="down-img-appstore"></div>
-                        <div class="down-img-gg"></div>
-                    </div>
-                </div>
-                <div class="banner-app-right">
-                    <!-- Placeholder overlay for app visual abstractions -->
-                    <div class="app-visual-placeholder"></div>
                 </div>
             </div>
         </div>
@@ -404,4 +437,48 @@
         </div>
     </footer>
 
+    <script>
+      (function () {
+        var stepItems = document.querySelectorAll('.step-item[data-step]');
+        var stepImgs = document.querySelectorAll('.steps-right-img[data-step-img]');
+        function setActiveStep(step) {
+          step = parseInt(step, 10);
+          stepItems.forEach(function (el) {
+            var n = parseInt(el.getAttribute('data-step'), 10);
+            el.classList.toggle('step-active', n === step);
+            el.classList.toggle('step-inactive', n !== step);
+            el.querySelector('.step-number').className = 'step-number ' + (n === step ? 'bg-gradient-brand' : 'bg-gray');
+            el.querySelector('.step-heading').className = 'step-heading ' + (n === step ? 'text-brand' : 'text-gray');
+            el.querySelector('.step-desc').className = 'step-desc ' + (n === step ? 'text-dark' : 'text-muted');
+          });
+          stepImgs.forEach(function (img) {
+            img.classList.toggle('steps-right-img--active', parseInt(img.getAttribute('data-step-img'), 10) === step);
+          });
+          var fill = document.querySelector('.stepper-line-fill');
+          var line = document.querySelector('.stepper-line');
+          if (fill && line) {
+            var activeItem = document.querySelector('.step-item.step-active');
+            if (activeItem) {
+              var lineRect = line.getBoundingClientRect();
+              var itemRect = activeItem.getBoundingClientRect();
+              var itemCenterY = itemRect.top - lineRect.top + itemRect.height / 2;
+              var fillHalf = 63;
+              fill.style.top = (itemCenterY - fillHalf) + 'px';
+            }
+          }
+        }
+        stepItems.forEach(function (el) {
+          el.addEventListener('click', function () { setActiveStep(el.getAttribute('data-step')); });
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveStep(el.getAttribute('data-step')); }
+          });
+        });
+        setActiveStep(document.querySelector('.step-item.step-active').getAttribute('data-step') || '1');
+        window.addEventListener('resize', function () {
+          var active = document.querySelector('.step-item.step-active');
+          if (active) setActiveStep(active.getAttribute('data-step'));
+        });
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

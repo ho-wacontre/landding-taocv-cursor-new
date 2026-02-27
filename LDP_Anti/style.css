@@ -1,51 +1,69 @@
 :root {
+    /* === FIGMA DESIGN TOKENS (from Variable Defs) === */
+    /* Colors - Primary & Green */
     --primary: #f07e1d;
     --primary-700: #1a56db;
+    --green-50: #f3faf7;
+    --green-100: #def7ec;
+    --green-200: #bcf0da;
+    --green-300: #84e1bc;
+    --green-400: #31c48d;
     --green-500: #0e9f6e;
-    --gray-900: #111928;
-    --gray-500: #6b7280;
-    --gray-200: #e5e7eb;
+    --green-600: #057a55;
+    --green-700: #046c4e;
+    --green-900: #014737;
+    /* Gray scale */
+    --gray-50: #f9fafb;
     --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-800: #1f2a37;
+    --gray-900: #111928;
     --white: #ffffff;
+    /* Character (text) - Figma */
+    --char-primary-85: rgba(0, 0, 0, 0.85);
+    --char-secondary-45: rgba(0, 0, 0, 0.45);
+    /* Radius - Figma */
+    --radius: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 9999px;
 
     --container-max-width: 1170px;
     --header-height: auto;
 
-    /* === PRECISE TYPOGRAPHY FROM FIGMA (550px viewport) === */
-    /* Hero Section */
+    /* === TYPOGRAPHY (Figma tokens: leading-tight/text-*) === */
+    /* Hero: text-5xl/font-bold */
     --fs-hero-title: 48px;
     --fw-hero-title: 700;
     --lh-hero-title: 1.25;
-
+    /* text-lg/font-normal */
     --fs-hero-desc: 18px;
     --fw-hero-desc: 400;
     --lh-hero-desc: 1.25;
-
-    /* Section Titles */
+    /* Section: text-4xl bold/semibold */
     --fs-section-title: 36px;
     --fw-section-title-bold: 700;
     --fw-section-title-semibold: 600;
     --lh-section-title: 1.25;
-
-    /* Feature Card Titles */
+    /* Card title: text-xl semibold */
     --fs-card-title: 22px;
     --fw-card-title: 600;
     --lh-card-title: 1.25;
-
-    /* Body Text */
+    /* Body: text-lg/base */
     --fs-body: 18px;
     --fw-body: 400;
     --lh-body: 1.25;
-
-    /* Testimonial */
+    /* Testimonial text */
     --fs-testimo-text: 18px;
     --fw-testimo-text: 400;
     --lh-testimo-text: 1.25;
-
+    /* H5/bold (Roboto), Body/regular (Be Vietnam Pro) */
     --fs-author-name: 16px;
     --fw-author-name: 700;
     --lh-author-name: 24px;
-
     --fs-author-role: 14px;
     --fw-author-role: 400;
     --lh-author-role: 22px;
@@ -67,8 +85,7 @@ body {
 .container {
     max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 0 16px;
-    /* Mobile horizontal padding */
+    padding: 0 15px;
 }
 
 a {
@@ -84,7 +101,7 @@ a {
     justify-content: center;
     font-weight: 500;
     font-size: 14px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     padding: 10px 16px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -110,6 +127,18 @@ a {
     color: var(--white);
 }
 
+/* Figma: CTA green (CV section) */
+.btn-green {
+    background-color: var(--green-500);
+    color: var(--white);
+    border: none;
+}
+
+.btn-green:hover {
+    background-color: var(--green-600);
+    color: var(--white);
+}
+
 .btn-employer {
     background-color: var(--primary-700);
     color: var(--white);
@@ -127,11 +156,11 @@ a {
 }
 
 /* ====================
-   HEADER SECTION
+   HEADER SECTION (Figma: white bg, text #111928)
    ==================== */
 .header {
     background-color: var(--white);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -141,7 +170,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
+    padding: 12px 15px;
     max-width: var(--container-max-width);
     margin: 0 auto;
 }
@@ -160,9 +189,10 @@ a {
 }
 
 .logo-text {
-    color: var(--primary);
-    font-weight: bold;
+    color: var(--gray-900);
+    font-weight: 700;
     font-size: 24px;
+    letter-spacing: -0.02em;
 }
 
 .main-nav {
@@ -183,9 +213,15 @@ a {
     text-decoration: none;
 }
 
+.nav-item:hover,
+.nav-item.active {
+    color: var(--gray-900);
+}
+
 .chevron-icon {
     width: 16px;
     height: 16px;
+    color: var(--gray-900);
 }
 
 .chevron-icon-white {
@@ -204,9 +240,14 @@ a {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 12px;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius-lg);
     cursor: pointer;
+    color: var(--gray-900);
+}
+
+.lang-selector:hover {
+    background: var(--gray-50);
 }
 
 .flag-icon {
@@ -219,7 +260,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -231,15 +272,22 @@ a {
 .btn-login {
     background: var(--primary);
     color: var(--white);
-    padding: 10px 16px;
+    padding: 10px 20px;
     gap: 8px;
 }
 
 .btn-register {
+    background: transparent;
     border: 1px solid var(--primary);
     color: var(--primary);
-    padding: 10px 16px;
+    padding: 10px 20px;
     gap: 8px;
+}
+
+.btn-register:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
 }
 
 .btn-employer {
@@ -253,32 +301,22 @@ a {
 /* ====================
    HERO SECTION
    ==================== */
+/* Figma 897-17078: Frame 427321848 – gradient fill_NGMYDZ, padding 32px 16px (mobile), row align center */
 .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 16px;
+    padding: 40px 0;
     position: relative;
     width: 100%;
-    background: linear-gradient(180deg, var(--green-200, #BCF0DA) 0.01%, rgba(243, 250, 247, 0.20) 99.99%);
-}
-
-.hero-bg-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: url('http://localhost:3845/assets/e65d41c4c101a12b9a40085e0f0195fc55f408ea.png') no-repeat center center/cover;
-    pointer-events: none;
+    background: linear-gradient(180deg, rgba(188, 240, 218, 1) 0%, rgba(243, 250, 247, 0.2) 100%);
 }
 
 .hero-container {
-    display: flex;
-    align-items: center;
-    gap: 30px;
     width: 100%;
     max-width: var(--container-max-width);
     position: relative;
+    margin: 0 auto;
 }
 
 .hero-wrapper {
@@ -294,7 +332,8 @@ a {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    width: 555px;
+    width: 100%;
+    max-width: 555px;
     flex-shrink: 0;
 }
 
@@ -305,14 +344,15 @@ a {
     line-height: var(--lh-hero-title);
     margin: 0;
     width: 100%;
+    color: var(--gray-900);
 }
 
 .text-dark {
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--char-primary-85);
 }
 
 .text-gradient {
-    background-image: linear-gradient(94.1671deg, rgb(5, 122, 85) 44.331%, rgb(49, 196, 141) 68.289%);
+    background-image: linear-gradient(94.1671deg, var(--green-600) 44.331%, var(--green-400) 68.289%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -323,7 +363,7 @@ a {
     font-weight: var(--fw-hero-desc);
     font-size: var(--fs-hero-desc);
     line-height: var(--lh-hero-desc);
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--char-primary-85);
     margin: 0;
     width: 100%;
 }
@@ -336,7 +376,7 @@ a {
     color: var(--white);
     width: 190px;
     height: 52px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -345,30 +385,67 @@ a {
     overflow: hidden;
 }
 
+/* Nút hero mobile (Figma 988-26069): nằm sau minh họa, ẩn trên desktop */
+.btn-hero-mobile {
+    display: none;
+}
+
 .hero-banner {
     width: 555px;
     height: 332px;
     position: relative;
     flex-shrink: 0;
     margin-left: auto;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+/* Ảnh mobile (897-17076) – ẩn trên desktop */
+.hero-banner-mobile {
+    display: none;
+}
+
+.hero-banner-inner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Figma 351:5829 Banner-CV Default – 555×332 */
+.hero-right-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center center;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    transform: scale(1.12);
+}
+
+.hero-banner-default {
+    opacity: 1;
+    z-index: 1;
+}
+
+.hero-banner-hover {
+    opacity: 0;
+    z-index: 2;
+}
+
+.hero-banner:hover .hero-banner-default {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.hero-banner:hover .hero-banner-hover {
+    opacity: 1;
+    transform: scale(1.18);
 }
 
 /* ===== Typography mapped from Figma (precise sizes) ===== */
-.banner-app-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: var(--fs-section-title);
-    line-height: var(--lh-section-title);
-    margin: 0;
-}
-
-.banner-app-desc {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: var(--fs-hero-desc);
-    line-height: var(--lh-hero-desc);
-    margin: 0;
-}
 
 .features-title {
     font-family: 'Inter', sans-serif;
@@ -380,15 +457,6 @@ a {
 }
 
 .template-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: var(--fw-section-title-bold);
-    font-size: var(--fs-section-title);
-    line-height: var(--lh-section-title);
-    margin: 0 0 8px 0;
-    text-align: center;
-}
-
-.testimo-title {
     font-family: 'Inter', sans-serif;
     font-weight: var(--fw-section-title-bold);
     font-size: var(--fs-section-title);
@@ -419,32 +487,6 @@ a {
     font-size: var(--fs-testimo-text);
     line-height: var(--lh-testimo-text);
     margin: 0;
-}
-
-.testimo-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: var(--fw-testimo-text);
-    font-size: var(--fs-testimo-text);
-    line-height: var(--lh-testimo-text);
-    margin: 0;
-}
-
-.author-name {
-    font-family: 'Roboto', sans-serif;
-    font-weight: var(--fw-author-name);
-    font-size: var(--fs-author-name);
-    line-height: var(--lh-author-name);
-    margin: 0;
-    color: rgba(0, 0, 0, 0.85);
-}
-
-.author-role {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-weight: var(--fw-author-role);
-    font-size: var(--fs-author-role);
-    line-height: var(--lh-author-role);
-    margin: 0;
-    color: rgba(0, 0, 0, 0.85);
 }
 
 .cv-card-preview {
@@ -502,12 +544,50 @@ a {
     .header-container {
         padding: 12px 40px;
     }
+
+    /* Steps: xếp dọc để hiển thị đầy đủ (trái + ảnh phải) */
+    .steps-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    .steps-left-side {
+        width: 100%;
+        max-width: 50%;
+        min-height: 0;
+    }
+    .steps-right-side {
+        width: 100%;
+        max-width: 50%;
+        min-height: 440px;
+        display: block;
+    }
+
+    /* Features: 3 thẻ dọc xếp 2 hàng hoặc thu nhỏ để không tràn */
+    .features-row-3 {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+    }
+    .feature-card.feature-vertical {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    .features-row-2 {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .feature-card.feature-horizontal {
+        width: 100%;
+        max-width: 558px;
+        flex: 0 0 auto;
+    }
 }
 
 
 
 /* ====================
-   FEATURES SECTION
+   FEATURES SECTION (Figma 867:17227 – layout, colors, typography)
    ==================== */
 .features {
     width: 100%;
@@ -518,6 +598,11 @@ a {
     padding: 0 32px;
 }
 
+.features-inner {
+    width: 100%;
+    position: relative;
+}
+
 .features-wrapper {
     display: flex;
     flex-direction: column;
@@ -525,25 +610,33 @@ a {
     gap: 40px;
     padding: 80px 0;
     width: 100%;
-    position: relative;
     z-index: 2;
 }
 
-/* Simulate the big linear gradient background of the wrapper */
-.features-wrapper::before {
-    content: '';
+/* Figma features_pattern: absolute 1448x818 background – nằm trong .features-inner */
+.features-inner .features-pattern {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    /* Always 32px from screen edges */
     height: 100%;
-    /* Match wrapper height */
     min-height: 818px;
     border-radius: 24px;
-    background: radial-gradient(circle at center 400px, rgba(0, 42, 8, 1) 0%, rgba(6, 27, 10, 1) 50%, rgba(11, 11, 11, 1) 100%);
+    overflow: hidden;
     z-index: -1;
+    pointer-events: none;
+}
+
+.features-pattern img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.features-wrapper::before {
+    content: none;
 }
 
 .features-header {
@@ -556,6 +649,7 @@ a {
     z-index: 1;
 }
 
+/* Figma features_badge: row, gap 8px, padding 2px 10px, fill rgba(228,255,200,0.2), text #B2EC77, text-sm/font-medium */
 .features-badge {
     background: rgba(228, 255, 200, 0.2);
     display: flex;
@@ -563,21 +657,22 @@ a {
     justify-content: center;
     gap: 8px;
     padding: 2px 10px;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.5;
-    color: #b2ec77;
+    color: #B2EC77;
 }
 
-.badge-dot {
+.features-badge-icon {
     width: 8px;
     height: 8px;
-    background: #bcf0da;
-    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
 }
 
+/* Figma features_title: style_6ANKYG – Inter 600, 36px, 1.25, gradient white → #bcf0da, center */
 .features-title {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -585,36 +680,38 @@ a {
     line-height: 1.25;
     text-align: center;
     margin: 0;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0%, rgba(188, 240, 218, 0.85) 100%);
+    text-transform: capitalize;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(188, 240, 218, 1) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+/* Figma features_grid: column, gap 24px, width 1170 */
 .features-grid {
     display: flex;
     flex-direction: column;
     gap: 24px;
     width: 100%;
     max-width: var(--container-max-width);
-    align-items: center;
-    /* Center the rows */
+    align-items: stretch;
     z-index: 1;
 }
 
+/* Figma features_card-3: row, align center, stretch, gap 24px */
 .features-row-3 {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     gap: 24px;
     width: 100%;
 }
 
+/* Figma features_card-2: row, gap 24px */
 .features-row-2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Center the cards */
     gap: 24px;
     width: 100%;
 }
@@ -622,12 +719,41 @@ a {
 .feature-card {
     position: relative;
     border-radius: 24px;
-    padding: 8px;
     z-index: 1;
-    /* Establishes a stacking context */
 }
 
-.feature-card-effect {
+/* Bỏ hiệu ứng hover cho vertical và horizontal */
+.feature-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* ----- Vertical card: 364x374, padding 8px, gap 8px ----- */
+.feature-card.feature-vertical {
+    width: 364px;
+    flex: 0 0 364px;
+    height: 374px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.feature-card-effect-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    object-fit: fill;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Vertical card: animated conic gradient border (kept from before) */
+.feature-card.feature-vertical .feature-card-effect {
     position: absolute;
     top: 0;
     left: 0;
@@ -636,20 +762,19 @@ a {
     border-radius: 24px;
     background: transparent;
     z-index: -1;
+    pointer-events: none;
 }
 
-.feature-card-effect::after {
+.feature-card.feature-vertical .feature-card-effect::after {
     content: '';
     position: absolute;
     inset: 2px;
-    /* Offset to create the 2px border limit */
     border-radius: 22px;
-    /* Smoother inner corner radius */
     background: #171717;
     z-index: -1;
 }
 
-.feature-card-effect::before {
+.feature-card.feature-vertical .feature-card-effect::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -659,99 +784,272 @@ a {
     background: conic-gradient(from 0deg, rgb(14, 159, 70) 0%, rgb(7, 108, 49) 15.636%, rgb(4, 83, 38) 23.454%, rgb(0, 57, 28) 31.272%, rgb(0, 31, 24) 100%);
     z-index: -2;
     transform: translate(-50%, -50%);
-    animation: rotate-border 4s linear infinite;
+    animation: feature-border-rotate 4s linear infinite;
 }
 
-@keyframes rotate-border {
+@keyframes feature-border-rotate {
     0% {
         transform: translate(-50%, -50%) rotate(0deg);
     }
-
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
-.feature-vertical {
-    position: relative;
-    width: 100%;
-    /* 3 * 364 + 2 * 24 = 1140px */
-    height: 374px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow: hidden;
-}
-
-.feature-horizontal {
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 24px;
-    gap: 24px;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-/* Vertical and Horizontal cards now share the same base .feature-card-effect */
-
-
-.feature-img-placeholder {
+.feature-card-img {
     width: 100%;
     height: 209px;
-    background: #0b0b0b;
-    border-radius: 16px;
     flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0B0B0B;
+    position: relative;
 }
 
-.feature-img-side-placeholder {
-    width: 180px;
-    /* More substantial image area */
-    height: 120px;
-    border-radius: 16px;
-    background: #0b0b0b;
-    flex-shrink: 0;
+/* Card 1: animation lên xuống tự động (như component Figma), không hover */
+.feature-card-img--float .feature-card-img-inner {
+    animation: feature-img-float 3s ease-in-out infinite;
 }
 
-.feature-content {
+@keyframes feature-img-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Card 2 & 3: hover đổi ảnh, giữ nguyên kích thước (không scale) */
+.feature-card-img-inner,
+.feature-card-img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.35s ease;
+}
+
+/* Ảnh hover giữ nguyên tỷ lệ, không zoom to (đặc biệt card 3: 320x185 trong ô 348x209) */
+.feature-card-img-hover {
+    opacity: 0;
+    pointer-events: none;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Card 3: ảnh 320×184.68 luôn canh giữa khi giao diện co giãn */
+.feature-card-img--card3 .feature-card-img-inner,
+.feature-card-img--card3 .feature-card-img-hover {
+    width: 320px;
+    height: 184.68px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Chỉ card 2 & 3: hover đổi ảnh, giữ nguyên kích thước */
+.feature-card-img:not(.feature-card-img--float) .feature-card-img-inner {
+    opacity: 1;
+}
+
+.feature-card-img:not(.feature-card-img--float):hover .feature-card-img-inner {
+    opacity: 0;
+}
+
+.feature-card-img:not(.feature-card-img--float):hover .feature-card-img-hover {
+    opacity: 1;
+}
+
+.feature-card.feature-vertical .feature-content {
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding: 16px;
     flex: 1;
+    min-height: 0;
 }
 
-.feature-horizontal .feature-content {
-    padding: 0;
-    justify-content: center;
-    flex: 1;
-    /* Take up available space */
-}
-
+/* Figma feature_card-title: style_RENSPY – Inter 600, 22px, 1.25, gradient #3AFD96 → #24A765 */
 .feature-heading {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 22px;
     line-height: 1.25;
     margin: 0;
-    background: linear-gradient(90deg, rgba(58, 253, 150, 0.85) 0%, rgba(36, 167, 101, 0.85) 100%);
+    text-align: left;
+    background: linear-gradient(90deg, rgba(58, 253, 150, 1) 0%, rgba(36, 167, 101, 1) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+/* Figma feature_card-desc: leading-tight/text-lg/font-normal, Character/Primary(inverse) #FFFFFF */
 .feature-desc {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 18px;
     line-height: 1.25;
-    color: #ffffff;
+    color: #FFFFFF;
+    margin: 0;
+    text-align: left;
+}
+
+/* ----- Horizontal card: 558x134, padding 24px, gap 24px ----- */
+.feature-card.feature-horizontal {
+    width: 558px;
+    flex: 0 0 558px;
+    min-height: 134px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+    gap: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.feature-card.feature-horizontal::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 22px;
+    background: #171717;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.feature-card-effect-h {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(14, 159, 70, 1) 0%, rgba(1, 71, 55, 1) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Figma Hover (378:5708 Color box, 380:5223 Text box): viền gradient đảo chiều dark → green */
+.feature-card-effect-h::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(1, 71, 55, 1) 0%, rgba(14, 159, 70, 1) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.feature-card.feature-horizontal:hover .feature-card-effect-h::after {
+    opacity: 1;
+}
+
+.feature-card-leftSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.feature-card.feature-horizontal .feature-heading {
     margin: 0;
 }
 
+.feature-card.feature-horizontal .feature-desc {
+    margin: 0;
+}
+
+.feature-card-rightSide {
+    flex-shrink: 0;
+    width: 127px;
+    min-height: 85px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    transform-origin: center center;
+}
+
+/* Figma Hover: Color item 369:5434 (card 1 zoom); Item text 369:5528 (card 2 không zoom) */
+.feature-card.feature-horizontal:first-child:hover .feature-card-rightSide {
+    transform: scale(1.12);
+}
+/* Card 2: không zoom hình */
+.feature-card.feature-horizontal:nth-child(2):hover .feature-card-rightSide {
+    transform: none;
+}
+
+.feature-card-rightSide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Stack default + hover images; hiệu ứng chạy ảnh ngang (slide) + crossfade */
+.feature-card-rightSide .rightSide-default,
+.feature-card-rightSide .rightSide-hover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.feature-card-rightSide .rightSide-default {
+    transition: opacity 0.5s ease;
+}
+.feature-card-rightSide .rightSide-hover {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(16px);
+}
+.feature-card.feature-horizontal:hover .feature-card-rightSide .rightSide-default {
+    opacity: 0;
+}
+.feature-card.feature-horizontal:hover .feature-card-rightSide .rightSide-hover {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(0);
+}
+
+/* Card 2: hai ảnh trượt cùng nhau sang trái, cách nhau 16px */
+.feature-card.feature-horizontal:nth-child(2) .feature-card-rightSide {
+    overflow: hidden;
+}
+.feature-card.feature-horizontal:nth-child(2) .feature-card-rightSide .rightSide-default {
+    opacity: 1;
+    left: 0;
+    transform: translate(0, -50%);
+}
+.feature-card.feature-horizontal:nth-child(2) .feature-card-rightSide .rightSide-hover {
+    opacity: 1;
+    left: calc(100% + 16px);
+    transform: translate(0, -50%);
+}
+.feature-card.feature-horizontal:nth-child(2):hover .feature-card-rightSide .rightSide-default,
+.feature-card.feature-horizontal:nth-child(2):hover .feature-card-rightSide .rightSide-hover {
+    opacity: 1;
+    transform: translate(calc(-100% - 16px), -50%);
+}
+
 /* ====================
-   STEPS SECTION
+   STEPS SECTION (Figma: 867-17230, components 990-27370)
    ==================== */
 .steps {
     display: flex;
@@ -763,45 +1061,65 @@ a {
 
 .steps-wrapper {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 30px;
     width: 100%;
     max-width: var(--container-max-width);
+    padding: 0 24px;
+    margin: 0 auto;
 }
 
+/* Left và right cùng chiều cao, không cố 633px để tránh tràn (Figma: vertical hug) */
 .steps-left-side {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 45px;
-    width: 555px;
+    width: 50%;
+    flex: 1;
+    min-width: 0;
 }
 
+/* Figma: style_OQKLW9 – Inter 700, 36px, 1.25em, Character/Primary .85, textCase TITLE (Title Case) */
 .steps-title {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 36px;
-    line-height: 1.25;
+    line-height: 1.25em;
     color: rgba(0, 0, 0, 0.85);
     margin: 0;
+    text-transform: capitalize;
 }
 
 .stepper-wrapper {
     display: flex;
     align-items: stretch;
-    gap: 16px;
+    gap: 20px;
     width: 100%;
     position: relative;
-    height: 498px;
+    flex: 1;
 }
 
+/* Chiều dài line = chiều cao nội dung (bằng stepper-content) */
 .stepper-line {
     width: 3px;
-    height: 498px;
-    background: #e5e7eb;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 99px;
     position: relative;
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Fill căn giữa theo step-item đang active (126px, Figma) */
+.stepper-line-fill {
+    position: absolute;
+    left: 0;
+    width: 3px;
+    height: 126px;
+    background: #0E9F6E;
+    border-radius: 99px;
+    transition: top 0.35s ease;
 }
 
 .stepper-content {
@@ -811,8 +1129,10 @@ a {
     height: 100%;
     flex: 1;
     min-width: 0;
+    gap: 24px;
 }
 
+/* Figma: step_item – padding 12px, gap 16px, border-radius 16px, 522px width */
 .step-item {
     display: flex;
     flex-direction: column;
@@ -821,16 +1141,25 @@ a {
     padding: 12px;
     border-radius: 16px;
     width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.step-active {
-    background: #f3faf7;
+/* Figma: Type=True – fill #F3FAF7 */
+.step-item.step-active {
+    background: #F3FAF7;
 }
 
-.step-inactive {
+.step-item.step-inactive {
     background: transparent;
 }
 
+/* Figma: Hover – inactive step hover */
+.step-item.step-inactive:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Figma: step_number – fill_WJMCZ5 gradient 90deg #057A55 → #31C48D; text leading-tight/text-lg font-semibold, Character/Primary(inverse) #FFF */
 .step-number {
     display: flex;
     align-items: center;
@@ -840,26 +1169,27 @@ a {
 }
 
 .bg-gradient-brand {
-    background: linear-gradient(to right, #057a55 3.2%, #31c48d 100%);
+    background: linear-gradient(90deg, #057A55 0%, #31C48D 100%);
 }
 
 .bg-gradient-brand span {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 18px;
-    line-height: 1.25;
-    color: #ffffff;
+    line-height: 125%;
+    color: #FFFFFF;
 }
 
+/* Figma: inactive step_number – fill #D1D5DB, text Character/Title .85, font-medium 18px */
 .bg-gray {
-    background: #d1d5db;
+    background: #D1D5DB;
 }
 
 .bg-gray span {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 18px;
-    line-height: 1.25;
+    line-height: 125%;
     color: rgba(0, 0, 0, 0.85);
 }
 
@@ -871,51 +1201,77 @@ a {
     width: 100%;
 }
 
+/* Figma: step-title style_Z0Q4OL – Inter 600, 20px, 1.25em. Active fill #0E9F6E */
 .step-heading {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 20px;
+    line-height: 1.25em;
     margin: 0;
 }
 
 .text-brand {
-    color: #0e9f6e;
+    color: #0E9F6E;
 }
 
 .text-gray {
-    color: #6b7280;
+    color: #6B7280;
 }
 
+/* Figma: step_description – leading-tight/text-lg font-normal. Active Character/Title .85 */
 .step-desc {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 18px;
+    line-height: 1.25em;
     margin: 0;
+}
+
+.text-dark {
+    color: rgba(0, 0, 0, 0.85);
 }
 
 .text-muted {
     color: rgba(0, 0, 0, 0.45);
 }
 
+/* Steps right side: Figma steps_rightSide 555×633 (chỉ xuất frame bên phải) */
 .steps-right-side {
-    width: 555px;
-    height: 633px;
+    width: 50%;
+    height: auto;
+    flex-shrink: 0;
     position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    align-self: stretch;
+}
+
+.steps-right-images {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 24px;
 }
 
-.steps-right-bg {
+.steps-right-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background: #f3faf7;
-    border-radius: 24px;
-    position: absolute;
-    top: 0;
-    left: 0;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.steps-right-img.steps-right-img--active {
+    opacity: 1;
 }
 
 /* ====================
-   SOCIAL PROOF (TESTIMONIALS)
+   SOCIAL PROOF (TESTIMONIALS) – Figma 869-17255 customer_container
    ==================== */
 .testimonials {
     display: flex;
@@ -931,9 +1287,12 @@ a {
     align-items: center;
     gap: 40px;
     width: 100%;
-    max-width: var(--container-max-width);
+    max-width: 1170px;
+    padding: 0 24px;
+    margin: 0 auto;
 }
 
+/* Figma 952:16414 – Inter Bold 36px, leading 1.25, "Khách hàng đã nói gì về" rgba(0,0,0,0.85) + "chúng tôi" gradient */
 .testimo-title {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -945,25 +1304,35 @@ a {
     text-transform: capitalize;
 }
 
+.testimo-title-gradient {
+    background: linear-gradient(89.74deg, rgba(5, 122, 85, 0.85) 71.6%, rgba(49, 196, 141, 0.85) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .testimo-grid {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
     gap: 30px;
     width: 100%;
 }
 
+/* cos_card – flex tự giãn, min 280px, #F3FAF7, 24px padding, gap 16, border-radius 24 */
 .testimo-card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
     padding: 24px;
-    background: #f3faf7;
+    background: #F3FAF7;
     border-radius: 24px;
-    width: 360px;
+    flex: 1 1 280px;
+    min-width: 280px;
 }
 
+/* Figma: cos_card-content – gap 24 */
 .testimo-content {
     display: flex;
     flex-direction: column;
@@ -972,19 +1341,31 @@ a {
     width: 100%;
 }
 
-.quote-icon {
+.testimo-quote-icon {
     width: 32px;
     height: 28px;
-    background: url('data:image/svg+xml;utf8,<svg width="32" height="28" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.14286 0C4.0931 0 0 4.17849 0 9.33333V28H13.7143V14H6.85714C6.85714 10.134 9.92589 7 13.7143 7V0H9.14286ZM27.4286 0C22.3788 0 18.2857 4.17849 18.2857 9.33333V28H32V14H25.1429C25.1429 10.134 28.2116 7 32 7V0H27.4286Z" fill="%23D1D5DB"/></svg>') no-repeat center;
-    background-size: contain;
+    display: block;
+    flex-shrink: 0;
 }
 
+/* Figma: cos_card-desc – leading-tight/text-lg font-normal, Character/Title .85 */
+.testimo-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.25em;
+    color: rgba(0, 0, 0, 0.85);
+    margin: 0;
+}
+
+/* Figma: cos_card-info – row, gap 12, padding 8, #DEF7EC, border-radius 12 */
 .testimo-info {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 12px;
     padding: 8px;
-    background: #def7ec;
+    background: #DEF7EC;
     border-radius: 12px;
     width: 100%;
 }
@@ -992,8 +1373,9 @@ a {
 .author-avatar {
     width: 58px;
     height: 58px;
-    background: #6b7280;
     border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .author-details {
@@ -1002,129 +1384,134 @@ a {
     align-items: flex-start;
     gap: 4px;
     flex: 1;
+    min-width: 0;
 }
 
-.author-details h4 {
+/* Figma: H5/bold – Roboto 700, 16px, 1.5em, Character/Title .85 */
+.author-name {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5em;
     color: rgba(0, 0, 0, 0.85);
     margin: 0;
 }
 
-.author-details p {
+/* Figma: Body/regular – Be Vietnam Pro 400, 14px, 1.57em, Character/Title .85 */
+.author-role {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    line-height: 22px;
+    line-height: 1.571em;
     color: rgba(0, 0, 0, 0.85);
     margin: 0;
 }
 
 /* ====================
-/* ====================
-   CALL TO ACTION (APP PROMO)
+   CALL TO ACTION (APP PROMO) – Figma 1076-17962
+   bannerApp_left = code | bannerApp_right = SVG (555×340)
    ==================== */
-.banner-app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(90deg, #057a55 0%, #31c48d 100%);
-    width: 100%;
-}
-
 .banner-app-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-}
-
-.banner-app-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    width: 100%;
-    max-width: var(--container-max-width);
+    background: linear-gradient(90deg, var(--green-600) 0%, var(--green-400) 100%);
+    padding: 0 24px;
     margin: 0 auto;
 }
 
-.banner-app-left {
+.bannerApp_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1170px;
+}
+
+.bannerApp_left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 32px;
     width: 555px;
-    height: 100%;
-    padding: 80px 0;
+    flex-shrink: 0;
 }
 
-.banner-app-content {
+.bannerApp_content {
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
 }
 
-.banner-app-title {
+.bannerApp_title {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 36px;
     line-height: 1.25;
-    color: white;
+    color: #FFFFFF;
     margin: 0;
 }
 
-.banner-app-desc {
+.bannerApp_desc {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 18px;
     line-height: 1.25;
-    color: white;
+    color: #FFFFFF;
     margin: 0;
 }
 
-.download-button-wrapper {
+.download_button-wrapper {
     display: flex;
     align-items: center;
     gap: 11px;
 }
 
-.down-img-appstore {
-    width: 178.92px;
-    height: 60px;
-    background: url('http://localhost:3845/assets/b0291754fcbbd70bd543aabfc05aaee41c6bcc26.png') no-repeat center;
-    background-size: cover;
+.banner-download-btn {
+    display: block;
+    line-height: 0;
 }
 
-.down-img-gg {
-    width: 201.43px;
+.banner-download-btn img {
+    display: block;
     height: 60px;
-    background: url('http://localhost:3845/assets/c349b997c783fcefe385f1c5e88c4836d2a84cd5.png') no-repeat center;
-    background-size: cover;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
 }
 
-.banner-app-right {
+.banner-download-btn:first-child img {
+    width: 178.922px;
+}
+
+.banner-download-btn:last-child img {
+    width: 201.429px;
+}
+
+.bannerApp_right {
     width: 555px;
     height: 340px;
-    position: relative;
+    flex-shrink: 0;
     overflow: hidden;
+    position: relative;
 }
 
-.app-visual-placeholder {
-    position: absolute;
-    width: 526px;
-    height: 581px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 32px;
-    border: 1px dashed rgba(49, 196, 141, 0.5);
-    border-radius: 50%;
+.bannerApp_right-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+@media (min-width: 1512px) {
+    .banner-app-container {
+        padding: 0 186px;
+    }
 }
 
 /* ====================
@@ -1212,15 +1599,59 @@ a {
 
 
 /* ====================
-   CV TEMPLATES SECTION
+   CV TEMPLATES SECTION (Figma node 396:5361 – layout, colors, typography)
    ==================== */
 .cv-templates {
     background-color: var(--white);
     padding: 80px 0;
-    /* Increased padding */
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.template-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.template-header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.template-header-block .template-title {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.25;
+    color: var(--char-primary-85);
+    text-align: center;
+}
+
+.template-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--char-primary-85);
+    margin: 0;
+    max-width: 100%;
+    text-align: center;
+}
+
+.template-cta-wrapper {
+    margin-top: 0;
+    text-align: center;
 }
 
 .cv-templates .features-title {
@@ -1233,35 +1664,54 @@ a {
     color: var(--gray-500);
 }
 
+.cv-templates .template-desc-figma {
+    color: var(--char-primary-85);
+}
+
+/* Figma layout_2BXCGC: grid 3 cols, gap 30px (from item positions 0,390,780) */
 .templates-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
     width: 100%;
     max-width: var(--container-max-width);
 }
 
+/* Figma Frame 115 (147:3338): item_cv Default #F3F3F3, Hover fill #DEF7EC, stroke #0E9F6E, shadow green */
 .template-card {
-    background: var(--white);
+    background: #F3F3F3;
     border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--gray-100);
+    border: 1px solid transparent;
     display: flex;
     flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+    box-shadow: none;
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .template-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    background: #DEF7EC;
+    border-color: #0E9F6E;
+    box-shadow: 0px 0px 40px 0px rgba(14, 159, 110, 0.25);
+    transform: none;
 }
 
 .template-preview {
     position: relative;
     aspect-ratio: 210 / 297;
-    /* A4 Ratio */
     background: var(--gray-100);
     overflow: hidden;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.template-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .template-placeholder {
@@ -1300,10 +1750,11 @@ a {
     background: linear-gradient(135deg, #111827, #374151);
 }
 
+/* Figma Hover: overlay không tối; button #057A55, padding 6px 15px, radius 6px, H5/regular */
 .template-actions {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(222, 247, 236, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1315,27 +1766,64 @@ a {
     opacity: 1;
 }
 
+.template-actions .btn {
+    background-color: #057A55 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #057A55;
+    padding: 6px 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Mobile-only button (flow layout per Figma 988-26684): hidden on desktop */
+.template-card-btn-mobile {
+    display: none;
+}
+
+/* Figma item_cv-name: row, align center, gap 8px */
 .template-info {
-    padding: 16px;
+    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--white);
+    gap: 8px;
+    background: transparent;
 }
 
+/* Figma item_cv-txt: leading-tight/text-base/font-semibold, fill #374151 */
 .template-name {
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 16px;
-    color: var(--gray-900);
+    line-height: 1.25;
+    color: var(--gray-700);
 }
 
+/* Figma item_cv-tag: fill #0E9F6E, padding 1px 8px, Footnote/description Roboto 12px/20, white */
 .badge-free {
-    background-color: #def7ec;
-    color: #03543f;
+    background-color: var(--green-500);
+    color: var(--white);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     font-size: 12px;
+    line-height: 1.6666667;
+    padding: 1px 8px;
+    border-radius: var(--radius-full);
+}
+
+/* Figma viewmore_template-button: 190x52, green #0E9F6E, text-base/font-medium */
+.cv-templates .btn-green.btn-large {
+    width: 190px;
+    height: 52px;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 9999px;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0 24px;
 }
 
 @media (max-width: 1024px) {
@@ -1353,13 +1841,8 @@ a {
 /* ====================
    OVERRIDES
    ==================== */
-.feature-horizontal .feature-card-effect {
-    display: none !important;
-}
-
-.feature-horizontal {
-    background: #171717 !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+.feature-card.feature-horizontal {
+    background: transparent;
 }
 
 /* ====================
@@ -1368,7 +1851,7 @@ a {
 @media (max-width: 768px) {
 
     /* ========================
-       HEADER
+       HEADER (keep green on mobile)
        ======================== */
     .header-container {
         padding: 12px 16px;
@@ -1401,131 +1884,441 @@ a {
     }
 
     /* ========================
-       HERO SECTION
+       HERO SECTION – Figma 897-17078 Frame 427321848 (chuẩn kích thước)
+       layout_G3D271: width 393, padding 32px 16px, row align center, gap 10px
+       layout_Z2SGPM: content 361px, column gap 30px
+       layout_P8S407: text block 361×142 | layout_BVXPEU: illustration height 248
        ======================== */
     .hero {
-        padding: 40px 16px;
+        padding: 32px 16px;
+        box-sizing: border-box;
+    }
+
+    .hero-container {
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
     }
 
     .hero-wrapper {
         flex-direction: column;
+        align-items: center;
         text-align: center;
-        gap: 24px;
+        gap: 30px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .hero-content {
         width: 100%;
+        max-width: 361px;
         align-items: center;
+        gap: 0;
+        box-sizing: border-box;
+    }
+
+    /* Figma 988-26069: Mask group desc mt-[88px] → khoảng cách title–mô tả 88px */
+    .hero-desc {
+        font-size: 14px;
+        line-height: 1.25em;
+        text-align: center;
+        max-width: 354px;
+        margin: 12px 0 0 0;
     }
 
     .hero-title {
         font-size: 30px;
-        line-height: 1.3;
-    }
-
-    .hero-desc {
-        font-size: 14px;
+        line-height: 1.25em;
+        text-align: center;
+        max-width: 361px;
+        margin: 0;
     }
 
     .btn-hero {
         width: 100%;
-        max-width: 320px;
+        box-sizing: border-box;
     }
 
+    /* Figma 988-26069: nút "Xem thêm mẫu CV" nằm sau minh họa (thứ tự: text → illustration → button) */
+    .btn-hero-desktop {
+        display: none !important;
+    }
+
+    .btn-hero-mobile {
+        display: flex !important;
+        width: 100%;
+        height: 52px;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    /* Frame 427321846: illustration height 248px, full width (361px) */
     .hero-banner {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 361px;
+        height: 248px;
+        min-height: 248px;
+        margin-left: 0;
+        flex-shrink: 0;
+        box-sizing: border-box;
+    }
+
+    .hero-banner-mobile {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: 361px;
+        max-height: 248px;
+        object-fit: contain;
+        object-position: center center;
+    }
+
+    .hero-banner-inner {
         display: none;
     }
 
+    .hero-banner .hero-right-image {
+        transform: scale(1);
+    }
+
+    .hero-banner:hover .hero-banner-default,
+    .hero-banner:hover .hero-banner-hover {
+        transform: scale(1);
+    }
+
     /* ========================
-       CV TEMPLATES SECTION
+       CV TEMPLATES – Figma 897-17476 template_container mobile
+       layout_U8YH7B: 392px, padding 40px 16px, column center
+       layout_1T6ISO: gap 32px | layout_QVN7HI: gap 12px
+       layout_JF100E: column gap 24px | item_cv layout_50NUAZ: padding 16px, gap 16px, 8px radius, #F3F3F3
+       layout_TD1VQJ: preview height 440 | layout_7ZHOWS: button 8px 16px, green/700 | CTA 190×52
        ======================== */
     .cv-templates {
-        padding: 60px 16px;
+        padding: 40px 16px;
+        box-sizing: border-box;
+    }
+
+    .template-section-wrapper {
+        gap: 32px;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .template-header-block {
+        gap: 12px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .template-header-block .template-title {
+        font-size: 24px;
+        line-height: 1.25em;
+        color: #111928;
+        text-align: center;
+    }
+
+    .template-desc {
+        font-size: 14px;
+        line-height: 1.25em;
+        color: #374151;
+        text-align: center;
     }
 
     .templates-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+    }
+
+    /* Figma 988-26684: padding 16px, gap 10px (giữa content và button), content bên trong gap 16px (image–name) */
+    .template-card {
+        padding: 16px;
+        gap: 10px;
+        border-radius: 16px;
+        background: #F3F3F3;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .template-preview {
+        aspect-ratio: auto;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+
+    .template-info {
+        gap: 8px;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 6px;
+    }
+
+    /* Mobile: layout Figma 988-26684 = image → name+tag → button (no overlay) */
+    .template-card .template-actions {
+        display: none;
+    }
+
+    .template-card-btn-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
+        background-color: #046C4E;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .template-name {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.25em;
+        color: #374151;
+    }
+
+    .badge-free {
+        background-color: #0E9F6E;
+        color: #FFFFFF;
+        padding: 1px 8px;
+        border-radius: 99px;
+        font-size: 12px;
+        line-height: 1.6666667em;
+    }
+
+    .template-actions .btn {
+        padding: 8px 16px;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5em;
+        background-color: #046C4E !important;
+        border-radius: 8px;
+    }
+
+    .template-cta-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .cv-templates .btn-green.btn-large {
+        width: 190px;
+        height: 52px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5em;
+        padding: 0 24px;
+        border-radius: 8px;
+        background-color: #0E9F6E;
     }
 
     /* ========================
-       FEATURES SECTION
+       FEATURES SECTION – Figma 988-26306 features_container (mobile 393px)
+       features_wrapper: px 16px py 40px | header top 40px | grid top 173px, w 361px, gap 24px
        ======================== */
     .features {
-        padding: 0 12px;
+        padding: 0;
     }
 
     .features-wrapper {
-        padding: 48px 0;
-        gap: 24px;
+        padding: 40px 16px;
+        gap: 0;
+        align-items: center;
+        margin: 0 auto;
     }
 
-    .features-wrapper::before {
+    .features-header {
+        max-width: 360px;
+        width: 100%;
+        margin-bottom: 37px;
+    }
+
+    .features-pattern {
         border-radius: 16px;
     }
 
+    /* Figma 988-26337: title 24px semibold, gradient rgba(255,255,255,0.85) → rgba(188,240,218,0.85), capitalize, center */
     .features-title {
-        font-size: 22px;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.25;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0%, rgba(188, 240, 218, 0.85) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        text-transform: capitalize;
+    }
+
+    .features-grid {
+        width: 100%;
+        gap: 24px;
+        margin: 0 auto;
     }
 
     .features-row-3 {
         flex-direction: column;
-        gap: 16px;
+        gap: 24px;
         align-items: stretch;
     }
 
-    .feature-vertical {
+    /* Figma 988-26340/26351/26362: features_card-vertical – p 8px, gap 8px, h 374px, img 209px, content p 16px gap 12px */
+    .feature-card.feature-vertical {
         width: 100% !important;
-        height: auto !important;
-        min-height: 0;
+        flex: none !important;
+        min-height: 374px;
+        height: auto;
+        padding: 8px;
+        gap: 8px;
     }
 
-    .feature-img-placeholder {
-        height: 160px;
+    .feature-card.feature-vertical .feature-card-img {
+        height: 209px;
+        min-height: 209px;
+        flex-shrink: 0;
+        background: #0b0b0b;
+        border-radius: 16px;
+    }
+
+    .feature-card.feature-vertical:nth-child(2) .feature-card-img {
+        height: 210px;
+        min-height: 210px;
+    }
+
+    .feature-card.feature-vertical .feature-content {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .feature-card.feature-vertical .feature-heading {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.25;
+        background: linear-gradient(90deg, rgba(58, 253, 150, 0.85), rgba(36, 167, 101, 0.85));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .feature-card.feature-vertical .feature-desc {
+        font-size: 18px;
+        line-height: 1.25;
+        color: #FFFFFF;
     }
 
     .features-row-2 {
         flex-direction: column;
-        gap: 16px;
+        gap: 24px;
         align-items: stretch;
     }
 
-    .feature-horizontal {
+    /* feature-horizontal responsive: cùng layout web (text trái, ảnh phải) nhưng xếp cột – text trên, ảnh dưới */
+    .feature-card.feature-horizontal {
         width: 100% !important;
+        max-width: 100%;
+        flex: none !important;
         flex-direction: column !important;
-        padding: 16px !important;
+        min-height: 0;
+        padding: 24px !important;
+        gap: 24px;
+        align-items: stretch;
+        box-sizing: border-box;
+    }
+
+    .feature-card.feature-horizontal .feature-card-leftSide {
+        order: 1;
         gap: 12px;
-        align-items: flex-start;
     }
 
-    .feature-img-side-placeholder {
+    .feature-card.feature-horizontal .feature-card-rightSide {
+        order: 2;
+        width: 127px;
+        min-height: 70px;
+        height: auto;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        flex-shrink: 0;
+    }
+
+    .feature-card.feature-horizontal:nth-child(2) .feature-card-rightSide {
+        min-height: 77px;
+    }
+
+    .feature-card.feature-horizontal:nth-child(2) .feature-card-rightSide .rightSide-default {
+    transform: none;
+    }
+
+    .feature-card.feature-horizontal .feature-card-rightSide img {
         width: 100%;
-        height: 120px;
+        height: auto;
+        max-width: 127px;
+        object-fit: contain;
     }
 
-    .feature-heading {
+    .feature-card.feature-horizontal .feature-card-rightSide .rightSide-default,
+    .feature-card.feature-horizontal .feature-card-rightSide .rightSide-hover {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+    }
+    .feature-card.feature-horizontal .feature-card-rightSide .rightSide-hover {
+        display: none;
+    }
+
+    .feature-card.feature-horizontal .feature-heading {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.25;
+        background: linear-gradient(90deg, rgba(58, 253, 150, 0.85), rgba(36, 167, 101, 0.85));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .feature-card.feature-horizontal .feature-desc {
         font-size: 18px;
-    }
-
-    .feature-desc {
-        font-size: 15px;
+        line-height: 1.25;
+        color: #FFFFFF;
     }
 
     /* ========================
-       STEPS SECTION
+       STEPS SECTION – Figma 897-17483 mobile: layout dọc (title → stepper dọc)
        ======================== */
     .steps {
-        padding: 60px 16px;
+        padding: 40px 16px;
     }
 
     .steps-wrapper {
         flex-direction: column;
-        gap: 24px;
+        align-items: stretch;
+        gap: 30px;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
     }
 
     .steps-left-side {
         width: 100%;
-        gap: 24px;
+        max-width: 100%;
+        min-height: 0;
+        gap: 32px;
     }
 
     .steps-title {
@@ -1533,50 +2326,62 @@ a {
     }
 
     .stepper-wrapper {
-        height: auto;
-        flex-direction: column;
-        gap: 0;
+        gap: 16px;
     }
 
     .stepper-line {
-        display: none;
+        height: auto;
     }
 
     .stepper-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         height: auto;
-        gap: 12px;
+        gap: 16px;
+        width: 100%;
     }
 
     .step-item {
-        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        gap: 16px;
+        flex-shrink: 0;
     }
 
     .step-heading {
-        font-size: 17px;
+        font-size: 20px;
     }
 
     .step-desc {
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .bg-gradient-brand span,
     .bg-gray span {
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .steps-right-side {
-        display: none;
+        width: 100%; 
+        max-width: 100%;
     }
 
     /* ========================
        TESTIMONIALS SECTION
        ======================== */
     .testimonials {
-        padding: 60px 16px;
+        padding: 40px 16px;
+    }
+
+    .testimo-wrapper {
+        padding: 0;
+        gap: 24px;
     }
 
     .testimo-title {
         font-size: 24px;
+        max-width: 360px;
     }
 
     .testimo-grid {
@@ -1586,39 +2391,61 @@ a {
     }
 
     .testimo-card {
-        width: 100%;
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
     /* ========================
-       BANNER APP SECTION
+       BANNER APP SECTION – Figma 1076-17962 (left = code, right = SVG)
        ======================== */
-    .banner-app-wrapper {
+    .banner-app-container {
+        padding: 0 16px;
+    }
+
+    .bannerApp_wrapper {
         flex-direction: column;
-        text-align: center;
-        align-items: center;
+        gap: 24px;
+        max-width: 100%;
+        padding: 0;
     }
 
-    .banner-app-left {
+    .bannerApp_left {
         width: 100%;
+        max-width: 100%;
         align-items: center;
-        padding: 60px 16px;
+        text-align: center;
+        margin-top: 40px;
     }
-
-    .banner-app-title {
+    
+    .bannerApp_title {
         font-size: 24px;
     }
 
-    .banner-app-desc {
-        font-size: 15px;
+    .bannerApp_desc {
+        font-size: 14px;
+        font-weight: 400;
     }
 
-    .download-button-wrapper {
+    .bannerApp_content {
+        align-items: center;
+        gap: 12px;
+    }
+
+    .bannerApp_right {
+        width: 100%;
+        max-width: 555px;
+        height: auto;
+        min-height: 200px;
+    }
+
+    .bannerApp_right-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .download_button-wrapper {
+        flex-wrap: nowrap;
         justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .banner-app-right {
-        display: none;
     }
 
     /* ========================
