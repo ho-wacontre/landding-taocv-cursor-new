@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa CV | Viecoi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cv-editor.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="cv-editor-body">
+    <!-- Top Toolbar - Figma 27200:64065 + hover từ component -->
+    <header class="cv-editor-toolbar">
+        <div class="cv-toolbar-inner">
+            <a href="index.html" class="cv-toolbar-close">
+                <svg class="cv-toolbar-close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+                <span>Đóng</span>
+            </a>
+            <div class="cv-toolbar-actions">
+                <button type="button" class="cv-toolbar-btn cv-toolbar-btn-outline">
+                    <svg class="cv-toolbar-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6M9 16h6M9 8h.01"/></svg>
+                    <span>Đổi mẫu</span>
+                </button>
+                <button type="button" class="cv-toolbar-btn cv-toolbar-btn-outline">
+                    <svg class="cv-toolbar-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Tải CV</span>
+                </button>
+                <button type="button" class="cv-toolbar-btn cv-toolbar-btn-primary">
+                    <svg class="cv-toolbar-btn-icon cv-toolbar-btn-icon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    <span>Thêm vào file CV của tôi</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="cv-editor-main">
+        <div id="cv-template-container">
+            <div class="cv-template-loader">Đang tải mẫu...</div>
+        </div> 
+    </main>
+
+    <!-- Zoom controls: Figma 37520:20299 - gap 12px, 3 boxes riêng -->
+    <div class="cv-zoom-controls">
+        <div class="cv-zoom-dropdown-wrapper">
+            <div class="cv-zoom-dropdown" id="cv-zoom-dropdown" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                <span id="cv-zoom-value">100%</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12" fill="none">
+                    <path d="M1.68555 3.14258C1.74241 3.14262 1.79565 3.17108 1.8291 3.2168L5 7.58691L8.1709 3.2168C8.2043 3.17115 8.25769 3.14271 8.31445 3.14258H9.15234C9.22463 3.14289 9.26708 3.22612 9.22363 3.28516L5.28809 8.70996C5.14634 8.90635 4.85379 8.90638 4.71094 8.70996L0.775391 3.28516C0.73298 3.226 0.776088 3.14258 0.848633 3.14258H1.68555Z" fill="black" fill-opacity="0.85"/>
+                </svg>
+            </div>
+            <div class="cv-zoom-dropdown-list" id="cv-zoom-dropdown-list" role="listbox">
+                <div class="cv-zoom-option" data-zoom="50" role="option">50%</div>
+                <div class="cv-zoom-option" data-zoom="75" role="option">75%</div>
+                <div class="cv-zoom-option" data-zoom="100" role="option">100%</div>
+                <div class="cv-zoom-option" data-zoom="125" role="option">125%</div>
+            </div>
+        </div>
+        <button type="button" class="cv-zoom-btn" id="cv-zoom-out" aria-label="Thu nhỏ">
+            <svg class="cv-zoom-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button type="button" class="cv-zoom-btn" id="cv-zoom-in" aria-label="Phóng to">
+            <svg class="cv-zoom-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var templateId = params.get('template') || '1';
+        var url = 'templates/cv-template-' + templateId + '.html';
+        var container = document.getElementById('cv-template-container');
+        var loader = container && container.querySelector('.cv-template-loader');
+        fetch(url)
+            .then(function(r) { return r.ok ? r.text() : Promise.reject(); })
+            .then(function(html) {
+                if (container) {
+                    container.innerHTML = html;
+                    document.dispatchEvent(new CustomEvent('cv-template-loaded'));
+                }
+            })
+            .catch(function() {
+                if (container) {
+                    container.innerHTML = '<div class="cv-template-loader">Vui lòng chạy local server: npx serve .</div>';
+                }
+            });
+    })();
+    </script>
+    <script src="cv-editor.js"></script>
+</body>
+
+</html>

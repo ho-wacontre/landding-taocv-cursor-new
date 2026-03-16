@@ -1,0 +1,915 @@
+/* ========================================
+   CV EDITOR - Styles per Figma Design
+   Node: 37498:20286 - Viecoi (exact specs)
+   ======================================== */
+
+.cv-editor-body {
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+/* Template loader - hiển thị khi đang fetch template */
+.cv-template-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 24px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+}
+
+/* Toolbar */
+.cv-editor-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--gray-200, #e5e7eb);
+    padding: 16px 32px;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.cv-toolbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1512px;
+    margin: 0 auto;
+}
+
+.cv-toolbar-close {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.cv-toolbar-close:hover {
+    color: var(--primary);
+}
+
+.cv-toolbar-close-icon {
+    flex-shrink: 0;
+}
+
+.cv-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cv-toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    border-radius: var(--radius-lg, 8px);
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cv-toolbar-btn-icon {
+    flex-shrink: 0;
+}
+
+/* Figma 27200:64071, 27200:64070 - icon màu primary (cam) */
+.cv-toolbar-btn-outline .cv-toolbar-btn-icon {
+    color: var(--primary, #f07e1d);
+}
+
+.cv-toolbar-btn-outline {
+    background: var(--white, #fff);
+    border: 1px solid var(--gray-200, #e5e7eb);
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.cv-toolbar-btn-outline:hover {
+    background: var(--gray-50, #f9fafb);
+}
+
+.cv-toolbar-btn-primary {
+    background: var(--primary, #f07e1d);
+    color: var(--white, #fff);
+}
+
+.cv-toolbar-btn-primary:hover {
+    background: #e06c10;
+    color: var(--white, #fff);
+}
+
+/* Main content */
+.cv-editor-main {
+    padding: 100px 24px 60px;
+}
+
+/* Template loader - shown while fetching template */
+.cv-template-loader {
+    text-align: center;
+    padding: 48px 24px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+}
+
+.cv-editor-wrapper {
+    max-width: 794px;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.cv-page-label_content {
+    padding: 4px 8px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.cv-page-label-spacing {
+    margin-top: 16px;
+}
+
+/* CV Card */
+.cv-card {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    overflow-x: clip;
+    margin-top: 8px;
+}
+
+.cv-card-inner {
+    display: flex;
+    min-height: 1123px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Sidebar - Left column - flex column để cv-sidebar-green fit trong cv-card-inner */
+.cv-sidebar {
+    width: 290px;
+    flex-shrink: 0;
+    background: var(--gray-100, #f3f4f6);
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Figma: green rounded header h=318px, pt=40, pb=12, px=12 */
+.cv-sidebar-header {
+    background: var(--green-900, #014737);
+    padding: 40px 12px 12px;
+    height: 318px;
+    box-sizing: border-box;
+    border-radius: 0 0 145px 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Figma: profile-card 266px, p=8, rounded 133px */
+.cv-avatar-wrap {
+    width: 266px;
+    height: 266px;
+    background: #fff;
+    border-radius: 133px;
+    padding: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cv-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Figma: left 40px, top 350px, w 258px, gap 16px */
+.cv-sidebar-personal {
+    width: 100%;
+    padding: 32px 16px;
+}
+
+.cv-sidebar-section .cv-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* Figma 37427:73273 - Inter Bold, 20px, leading normal, rgba(0,0,0,0.85), uppercase */
+.cv-section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.85);
+    letter-spacing: 0;
+}
+
+/* Figma 37427:73268 - section-title__icon: bg green-900, p-[6px], rounded-[50px], icon 20px */
+.cv-section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    background: var(--green-900, #014737);
+    border-radius: 50px;
+    color: #fff;
+    flex-shrink: 0;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.cv-section-icon svg,
+.cv-section-icon .cv-icon-svg {
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Icons on green bg: show white */
+.cv-section-icon .cv-icon-svg,
+.cv-section-icon-green .cv-icon-svg {
+    filter: brightness(0) invert(1);
+}
+
+/* Icons on white bg: show green */
+.cv-section-icon-white .cv-icon-svg {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(52%) saturate(1200%) hue-rotate(140deg) brightness(95%);
+}
+
+.cv-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 0;
+}
+
+.cv-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+}
+
+.cv-info-list li svg,
+.cv-info-list li .cv-info-icon {
+    flex-shrink: 0;
+    color: #333;
+}
+
+/* Green sidebar section - giới hạn chiều cao trong cv-card-inner, không scroll, overflow -> trang 2 */
+.cv-sidebar-green {
+    flex: 1;
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--green-900, #014737);
+    padding: 24px 16px 40px 16px;
+    border-radius: 24px 24px 0 0;
+}
+
+/* cv-sidebar-green dùng cv-section (giống Kinh nghiệm làm việc): gap 16px, margin-bottom 32px */
+.cv-sidebar-green .cv-section-in-sidebar-green {
+    margin-bottom: 32px;
+}
+
+.cv-sidebar-green .cv-section-in-sidebar-green:last-child {
+    margin-bottom: 0;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* cv-skill-tags: không overflow hidden - phần tràn sẽ được JS chuyển sang trang 2/3, không ẩn */
+.cv-sidebar-green .cv-section-in-sidebar-green:last-child .cv-skill-tags {
+    max-height: 100%;
+}
+
+.cv-section-title-white {
+    color: #fff !important;
+}
+
+.cv-section-icon-white {
+    background: #fff !important;
+    color: var(--green-900) !important;
+}
+
+/* Icon SVG: white on green circle, green on white circle */
+.cv-section-icon .cv-icon-svg,
+.cv-section-icon-green .cv-icon-svg {
+    filter: brightness(0) invert(1);
+}
+
+.cv-section-icon-white .cv-icon-svg {
+    filter: none;
+}
+
+.cv-lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.cv-lang-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cv-lang-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.cv-lang-bar {
+    height: 8px;
+    background: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+/* Figma: lang bar fill 166px (64% of 258px) */
+.cv-lang-fill {
+    height: 100%;
+    min-width: 0;
+    background: var(--green-400, #31c48d);
+    border-radius: 2px;
+}
+
+.cv-skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cv-skill-tag {
+    background: var(--green-600, #057a55);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Content - Right column */
+.cv-content {
+    flex: 1;
+    padding: 40px 24px;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+
+.cv-header {
+    margin-bottom: 32px;
+}
+
+.cv-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--green-900, #014737);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+}
+
+.cv-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--green-500, #0e9f6e);
+}
+
+/* Figma 30782:153915 - resume-section: flex-col gap-[16px] */
+.cv-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    width: 100%;
+    min-width: 0;
+}
+
+.cv-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Figma 30782:153916 - section-title: flex gap-[8px] items-center w-full */
+.cv-section .cv-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+/* Figma 37427:73273 - title text: Inter Bold 20px, rgba(0,0,0,0.85), uppercase */
+.cv-section-title-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: normal;
+    color: rgba(0, 0, 0, 0.85);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.cv-section-title-text-white {
+    color: #fff !important;
+}
+
+.cv-section-icon-green {
+    background: var(--green-900, #014737) !important;
+    color: #fff !important;
+}
+
+/* Figma 30782:153919 - info-list: flex-col gap-[12px], 14px, leading 1.5 */
+.cv-job-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+/* Figma 37427:73288 - job-info__item: flex gap-[16px] items-center */
+.cv-job-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+}
+
+/* Figma 30782:153921 - label w-[150px], Inter Regular */
+.cv-job-label {
+    width: 150px;
+    min-width: 150px;
+    flex-shrink: 0;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+/* Figma 37427:73287 - value Inter Semi Bold */
+.cv-job-value {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.85);
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* List chứa nhiều cv-edu-item - giống cv-exp-list */
+.cv-edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    min-width: 0;
+}
+
+.cv-edu-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.cv-edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv-edu-school {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.85);
+    text-transform: capitalize;
+}
+
+.cv-edu-year {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cv-edu-detail {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.cv-exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    min-width: 0;
+}
+
+.cv-exp-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+}
+
+.cv-exp-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cv-exp-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.cv-exp-role {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.85);
+    flex: 1;
+    text-transform: capitalize;
+}
+
+.cv-exp-year {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.cv-exp-company {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cv-exp-bullets {
+    margin: 0;
+    padding-left: 21px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.5;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cv-exp-bullets li {
+    margin-bottom: 4px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cv-exp-bullets li:last-child {
+    margin-bottom: 0;
+}
+
+/* Page 2 - Figma 37503:20288 */
+.cv-page-label-hidden {
+    display: none !important;
+}
+
+.cv-editor-wrapper.cv-has-page2 .cv-page-label-2.cv-page-label-hidden {
+    display: block !important;
+}
+
+.cv-card-page2-hidden {
+    display: none !important;
+}
+
+.cv-editor-wrapper.cv-has-page2 .cv-card-page2.cv-card-page2-hidden {
+    display: block !important;
+}
+
+/* cv-exp-item-split di chuyển bằng JS, không dùng CSS ẩn */
+
+.cv-card-page2 .cv-card-inner-page2 {
+    display: flex;
+    height: 1123px;
+    max-height: 1123px;
+    overflow: hidden;
+}
+
+.cv-sidebar-page2 {
+    width: 290px;
+    flex-shrink: 0;
+    background: var(--green-900, #014737);
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.cv-sidebar-green-page2 {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 24px 16px;
+    border-radius: 24px 24px 0 0;
+}
+
+/* Ẩn phần Ngôn ngữ trên Trang 2/3 khi trống */
+.cv-sidebar-green-page2 .cv-lang-section-page2:has(#cv-lang-list-page2:empty) {
+    display: none;
+}
+
+.cv-sidebar-green-page3 .cv-lang-section-page3:has(#cv-lang-list-page3:empty) {
+    display: none;
+}
+
+.cv-content-page2 {
+    padding: 40px 24px 40px 32px;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cv-card-page2 {
+    margin-top: 8px;
+}
+
+/* Page 1 overflow - cố định 1123px, clip để phát hiện overflow chính xác */
+.cv-card-page1 .cv-card-inner {
+    height: 1123px;
+    max-height: 1123px;
+    overflow: hidden;
+}
+
+/* Vùng content Trang 1: giới hạn chiều cao để scrollHeight đo đúng */
+#cv-card-page1 .cv-content {
+    max-height: 1123px;
+}
+
+/* Giới hạn chiều cao vùng content Trang 1 để scrollHeight/clientHeight phát hiện overflow đúng */
+#cv-card-page1 .cv-content {
+    max-height: 1123px;
+}
+
+/* Giới hạn chiều cao vùng content Trang 1 để scrollHeight/clientHeight đo đúng */
+#cv-card-page1 .cv-content {
+    max-height: 1123px;
+}
+
+/* Vùng content Trang 1: giới hạn chiều cao để scrollHeight phát hiện overflow */
+.cv-card-page1 .cv-content {
+    max-height: 1123px;
+}
+
+/* Không scroll trong vùng content - nội dung vượt quá chuyển sang Trang 2 */
+.cv-content {
+    overflow-y: hidden;
+}
+
+/* Trang 2: cố định 1123px như Trang 1, overflow -> Trang 3 */
+.cv-card-page2 .cv-card-inner-page2 {
+    height: 1123px;
+    max-height: 1123px;
+    overflow: hidden;
+}
+
+#cv-card-page2 .cv-content-page2 {
+    max-height: 1123px;
+}
+
+/* Page 3 - nhận overflow từ Trang 2 */
+.cv-page-label-3.cv-page-label-hidden {
+    display: none !important;
+}
+
+.cv-editor-wrapper.cv-has-page3 .cv-page-label-3.cv-page-label-hidden {
+    display: block !important;
+}
+
+.cv-card-page3-hidden {
+    display: none !important;
+}
+
+.cv-editor-wrapper.cv-has-page3 .cv-card-page3.cv-card-page3-hidden {
+    display: block !important;
+}
+
+.cv-card-page3 .cv-card-inner-page3 {
+    display: flex;
+    min-height: 1123px;
+    height: auto;
+}
+
+.cv-sidebar-page3 {
+    width: 290px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--green-900, #014737);
+    margin-left: 24px;
+}
+
+.cv-sidebar-green-page3 {
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+}
+
+.cv-sidebar-green-page3 .cv-skill-tags,
+.cv-sidebar-green-page3 .cv-lang-list {
+    max-height: none;
+    overflow: visible;
+}
+
+.cv-content-page3 {
+    padding: 40px 24px 40px 32px;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cv-card-page3 {
+    margin-top: 8px;
+}
+
+/* Zoom controls - Figma 37520:20299 (độ chính xác tuyệt đối) */
+.cv-zoom-controls {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 50;
+}
+
+/* Dropdown wrapper - để list position relative */
+.cv-zoom-dropdown-wrapper {
+    position: relative;
+}
+
+/* Dropdown trigger - Figma Dropdown-Trigger 27200:64072 */
+.cv-zoom-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--white, #fff);
+    border: 1px solid var(--gray-200, #e5e7eb);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+}
+
+.cv-zoom-chevron {
+    flex-shrink: 0;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.cv-zoom-dropdown-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 4px;
+    background: var(--white, #fff);
+    border: 1px solid var(--gray-200, #e5e7eb);
+    border-radius: 6px;
+    padding: 4px 0;
+    min-width: 80px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cv-zoom-dropdown-list.cv-zoom-menu-open {
+    display: block;
+}
+
+.cv-zoom-option {
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+}
+
+.cv-zoom-option:hover {
+    background: var(--gray-50, #f9fafb);
+}
+
+.cv-zoom-option.active {
+    background: var(--gray-100, #f3f4f6);
+}
+
+/* Buttons - Figma Button 27200:64073, 27200:64074 - rounded-lg 8px, p 8px, icon 20px */
+.cv-zoom-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background: var(--white, #fff);
+    border: 1px solid var(--gray-200, #e5e7eb);
+    border-radius: 8px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.cv-zoom-btn:hover {
+    background: var(--gray-50, #f9fafb);
+}
+
+.cv-zoom-btn-icon {
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cv-card-inner {
+        flex-direction: column;
+    }
+
+    .cv-sidebar {
+        width: 100%;
+    }
+
+    .cv-sidebar-header {
+        border-radius: 0;
+        padding: 24px;
+    }
+
+    .cv-avatar-wrap {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    .cv-sidebar-personal {
+        padding: 16px;
+    }
+
+    .cv-sidebar-green {
+        border-radius: 0;
+        padding-bottom: 24px;
+    }
+
+    .cv-content {
+        padding: 24px 16px;
+    }
+
+    .cv-toolbar-inner {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .cv-toolbar-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .cv-toolbar-btn span:not(.cv-toolbar-close span) {
+        display: none;
+    }
+}
