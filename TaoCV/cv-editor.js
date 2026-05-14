@@ -2,8 +2,19 @@
  * CV Editor - Overflow logic Trang 1 -> 2 -> 3
  * Một nguồn dữ liệu (Trang 1). Tràn Trang 1 -> Trang 2 (1123px). Tràn Trang 2 -> Trang 3.
  * cv-sidebar-green (Kĩ năng) cũng tràn sang trang tiếp theo, không dùng scroll.
+ *
+ * Build marker: 20260514-9
  */
 (function () {
+    if (typeof window !== 'undefined') {
+        window.__CV_EDITOR_BUILD__ = '20260514-9';
+        try {
+            console.log(
+                '%c[cv-editor] build ' + window.__CV_EDITOR_BUILD__,
+                'background:#10b981;color:#fff;padding:2px 8px;border-radius:4px;font-weight:bold'
+            );
+        } catch (_) {}
+    }
     var WRAPPER = '.cv-editor-wrapper';
     var PAGE1_CONTENT = '#cv-card-page1 .cv-content';
     var PAGE1_EXP_LIST = '#cv-card-page1 .cv-exp-list';
@@ -29,11 +40,14 @@
         var list1 = document.querySelector(PAGE1_EXP_LIST);
         var list2 = document.querySelector(PAGE2_EXP_LIST);
         if (!list1 || !list2) return;
-        while (hasOverflowPage1()) {
+        var maxIter = 50;
+        while (hasOverflowPage1() && maxIter-- > 0) {
             var items = list1.querySelectorAll(SPLIT_SELECTOR);
             if (items.length === 0) break;
             var lastSplit = items[items.length - 1];
             list2.insertBefore(lastSplit, list2.firstChild);
+            /* Force reflow để getBoundingClientRect ở vòng kế tiếp đo đúng */
+            void list1.offsetHeight;
         }
     }
 
@@ -41,11 +55,13 @@
         var list2 = document.querySelector(PAGE2_EXP_LIST);
         var list3 = document.querySelector(PAGE3_EXP_LIST);
         if (!list2 || !list3) return;
-        while (hasOverflowPage2()) {
+        var maxIter = 50;
+        while (hasOverflowPage2() && maxIter-- > 0) {
             var items = list2.querySelectorAll(SPLIT_SELECTOR);
             if (items.length === 0) break;
             var lastSplit = items[items.length - 1];
             list3.insertBefore(lastSplit, list3.firstChild);
+            void list2.offsetHeight;
         }
     }
 
@@ -189,14 +205,38 @@
     function hasOverflowPage1() {
         var content = document.querySelector(PAGE1_CONTENT);
         if (!content) return false;
+
+        /* 1) So sánh bounding rect của lastItem so với content.
+           Dùng -2 (thay cho +2 cũ) tăng safety margin: nếu item gần chạm
+           biên dưới (cách <= 2px) cũng coi là overflow để tránh half-line clip
+           do sub-pixel/line-height anti-aliasing. */
         var list = content.querySelector('.cv-exp-list');
         if (list && list.children.length > 0) {
             var lastItem = list.children[list.children.length - 1];
             var contentRect = content.getBoundingClientRect();
             var lastRect = lastItem.getBoundingClientRect();
-            if (lastRect.bottom > contentRect.bottom + 2) return true;
+            if (lastRect.bottom > contentRect.bottom - 2) return true;
         }
-        return content.scrollHeight > content.clientHeight;
+
+        /* 2) Fallback dùng scrollHeight vs clientHeight (chuẩn cho overflow:hidden) */
+        if (content.scrollHeight > content.clientHeight + 2) return true;
+
+        /* 3) Fallback v10/v11: inner stack flex column trong .cv-content absolute */
+        var stackSelectors = ['.cv-v10-main-stack', '.cv-v11-main-stack'];
+        for (var si = 0; si < stackSelectors.length; si++) {
+            var stack = content.querySelector(stackSelectors[si]);
+            if (stack) {
+                var cardInner = document.querySelector('#cv-card-page1 .cv-card-inner');
+                var stackRect = stack.getBoundingClientRect();
+                if (cardInner) {
+                    var cardRect = cardInner.getBoundingClientRect();
+                    if (stackRect.bottom > cardRect.bottom - 24 - 2) return true;
+                }
+                if (stack.scrollHeight > content.clientHeight + 2) return true;
+            }
+        }
+
+        return false;
     }
 
     function hasOverflowPage2() {
@@ -207,9 +247,9 @@
             var lastItem = list.children[list.children.length - 1];
             var contentRect = content.getBoundingClientRect();
             var lastRect = lastItem.getBoundingClientRect();
-            if (lastRect.bottom > contentRect.bottom + 2) return true;
+            if (lastRect.bottom > contentRect.bottom - 2) return true;
         }
-        return content.scrollHeight > content.clientHeight;
+        return content.scrollHeight > content.clientHeight + 2;
     }
 
     function scheduleReconnectMutationObserver() {
@@ -225,6 +265,24 @@
         var wrapper = document.querySelector(WRAPPER);
         var content = document.querySelector(PAGE1_CONTENT);
         if (!wrapper || !content) return;
+
+        /* Diagnostic: in console một lần mỗi 800ms để user xem có overflow hay không */
+        try {
+            var nowKey = Math.floor(Date.now() / 800);
+            if (window.__cv_lastLog !== nowKey) {
+                window.__cv_lastLog = nowKey;
+                var listDbg = content.querySelector('.cv-exp-list');
+                var info = {
+                    template: (wrapper.className.match(/cv-template-v\d+/) || [''])[0],
+                    contentClient: content.clientHeight,
+                    contentScroll: content.scrollHeight,
+                    listChildren: listDbg ? listDbg.children.length : 0,
+                    hasOverflow: hasOverflowPage1(),
+                    hasPage2Class: wrapper.classList.contains('cv-has-page2')
+                };
+                console.log('[cv-editor] checkOverflow', info);
+            }
+        } catch (_) {}
         /* Tạm ngắt MutationObserver để tránh vòng lặp: move -> mutation -> reset -> move */
         if (mutationObserverRef) mutationObserverRef.disconnect();
 
@@ -255,6 +313,9 @@
                         wrapper.classList.add('cv-has-page3');
                     }
                 }
+                /* Failsafe pass cuối — đảm bảo không còn item nào tràn biên */
+                failsafeMoveOverflow();
+                updateEmptyClasses();
                 scheduleReconnectMutationObserver();
             });
             return;
@@ -282,6 +343,8 @@
                     moveOverflowLangItemsToPage3();
                     wrapper.classList.add('cv-has-page3');
                 }
+                failsafeMoveOverflow();
+                updateEmptyClasses();
                 scheduleReconnectMutationObserver();
             });
         } else if (hasPage2 && (hasOverflowPage2() || hasOverflowSidebarGreenPage2())) {
@@ -302,6 +365,88 @@
             if (list3 && list3.children.length > 0) wrapper.classList.add('cv-has-page3');
             scheduleReconnectMutationObserver();
         }
+
+        /* FAILSAFE: ép buộc move bất kỳ exp-item nào còn tràn biên trên page 1 / page 2.
+           Đây là pass cuối, không tin vào hasOverflowPage1/2 mà so sánh trực tiếp bottom. */
+        failsafeMoveOverflow();
+
+        /* Cập nhật class .cv-is-empty / .cv-sidebar-all-empty sau mỗi lần
+           reflow nội dung để CSS ẩn các section / icon-circle dư thừa. */
+        updateEmptyClasses();
+    }
+
+    /**
+     * Failsafe: dò TỪNG exp-item-split trên page 1 / page 2, item nào có
+     * bottom > content.bottom (hoặc scrollHeight > clientHeight) thì move
+     * sang page kế tiếp. Dùng kết hợp BOTH bounding rect VÀ scrollHeight
+     * để bắt được mọi loại overflow (sub-pixel, layout-thrashing, ...).
+     * Đây là pass an toàn cuối — không phụ thuộc hasOverflowPageN.
+     */
+    function failsafeMoveOverflow() {
+        try {
+            var content1 = document.querySelector(PAGE1_CONTENT);
+            var list1 = document.querySelector(PAGE1_EXP_LIST);
+            var list2 = document.querySelector(PAGE2_EXP_LIST);
+            var wrapper = document.querySelector(WRAPPER);
+            if (content1 && list1 && list2) {
+                var movedToPage2 = 0;
+                var maxIter = 30;
+                while (maxIter-- > 0) {
+                    var items = list1.querySelectorAll(SPLIT_SELECTOR);
+                    if (items.length === 0) break;
+                    /* Force reflow trước khi đo */
+                    void content1.offsetHeight;
+                    var contentBottom = content1.getBoundingClientRect().bottom;
+                    var lastItem = items[items.length - 1];
+                    var lastBottom = lastItem.getBoundingClientRect().bottom;
+                    var hasRectOverflow = lastBottom > contentBottom + 0.5;
+                    var hasScrollOverflow = content1.scrollHeight > content1.clientHeight + 1;
+                    if (hasRectOverflow || hasScrollOverflow) {
+                        list2.insertBefore(lastItem, list2.firstChild);
+                        void list1.offsetHeight;
+                        void content1.offsetHeight;
+                        movedToPage2++;
+                    } else {
+                        break;
+                    }
+                }
+                if (movedToPage2 > 0 && wrapper) {
+                    wrapper.classList.add('cv-has-page2');
+                    console.log('[cv-editor] failsafe page1→page2 moved', movedToPage2, 'item(s)');
+                }
+            }
+
+            var content2 = document.querySelector(PAGE2_CONTENT);
+            var list3 = document.querySelector(PAGE3_EXP_LIST);
+            if (content2 && list2 && list3) {
+                var movedToPage3 = 0;
+                var maxIter2 = 30;
+                while (maxIter2-- > 0) {
+                    var items2 = list2.querySelectorAll(SPLIT_SELECTOR);
+                    if (items2.length === 0) break;
+                    void content2.offsetHeight;
+                    var contentBottom2 = content2.getBoundingClientRect().bottom;
+                    var lastItem2 = items2[items2.length - 1];
+                    var lastBottom2 = lastItem2.getBoundingClientRect().bottom;
+                    var hasRectOverflow2 = lastBottom2 > contentBottom2 + 0.5;
+                    var hasScrollOverflow2 = content2.scrollHeight > content2.clientHeight + 1;
+                    if (hasRectOverflow2 || hasScrollOverflow2) {
+                        list3.insertBefore(lastItem2, list3.firstChild);
+                        void list2.offsetHeight;
+                        void content2.offsetHeight;
+                        movedToPage3++;
+                    } else {
+                        break;
+                    }
+                }
+                if (movedToPage3 > 0 && wrapper) {
+                    wrapper.classList.add('cv-has-page3');
+                    console.log('[cv-editor] failsafe page2→page3 moved', movedToPage3, 'item(s)');
+                }
+            }
+        } catch (e) {
+            try { console.warn('[cv-editor] failsafe error', e); } catch (_) {}
+        }
     }
 
     function debouncedCheck(allowRemove) {
@@ -309,7 +454,49 @@
         debounceTimer = setTimeout(function () {
             debounceTimer = null;
             checkOverflow(allowRemove);
+            updateEmptyClasses();
         }, DEBOUNCE_MS);
+    }
+
+    /**
+     * Toggle class `cv-is-empty` lên các container ở page 2/3 nếu chúng không
+     * có element con. Dùng JS thay cho `:has(:empty)` để chắc chắn hoạt động
+     * trên trình duyệt cũ và tránh nhầm lẫn do whitespace text-node.
+     */
+    function updateEmptyClasses() {
+        var ids = [
+            'cv-lang-list-page2', 'cv-lang-list-page3',
+            'cv-skill-tags-page2', 'cv-skill-tags-page3',
+            'cv-exp-list-page2', 'cv-exp-list-page3'
+        ];
+        for (var i = 0; i < ids.length; i++) {
+            var el = document.getElementById(ids[i]);
+            if (!el) continue;
+            if (el.children.length === 0) {
+                el.classList.add('cv-is-empty');
+            } else {
+                el.classList.remove('cv-is-empty');
+            }
+        }
+
+        /* Mark wrapper card khi cả lang & skill ở page 2/3 đều rỗng để CSS
+           có thể ẩn sidebar và mở rộng content full-width. */
+        var card2 = document.getElementById('cv-card-page2');
+        if (card2) {
+            var lang2 = document.getElementById('cv-lang-list-page2');
+            var skill2 = document.getElementById('cv-skill-tags-page2');
+            var bothEmpty2 = (!lang2 || lang2.children.length === 0) &&
+                             (!skill2 || skill2.children.length === 0);
+            card2.classList.toggle('cv-sidebar-all-empty', bothEmpty2);
+        }
+        var card3 = document.getElementById('cv-card-page3');
+        if (card3) {
+            var lang3 = document.getElementById('cv-lang-list-page3');
+            var skill3 = document.getElementById('cv-skill-tags-page3');
+            var bothEmpty3 = (!lang3 || lang3.children.length === 0) &&
+                             (!skill3 || skill3.children.length === 0);
+            card3.classList.toggle('cv-sidebar-all-empty', bothEmpty3);
+        }
     }
 
     function init() {
@@ -333,6 +520,9 @@
             setTimeout(function () { checkOverflow(true); }, 1500);
             setTimeout(function () { checkOverflow(true); }, 2500);
             setTimeout(function () { checkOverflow(true); }, 3000);
+            /* Failsafe pass riêng — chạy sau cùng khi font/image đã settle hoàn toàn */
+            setTimeout(function () { failsafeMoveOverflow(); updateEmptyClasses(); }, 4000);
+            setTimeout(function () { failsafeMoveOverflow(); updateEmptyClasses(); }, 5500);
         });
 
         var wrapper = document.querySelector(WRAPPER);
