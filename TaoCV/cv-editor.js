@@ -3,11 +3,11 @@
  * Một nguồn dữ liệu (Trang 1). Tràn Trang 1 -> Trang 2 (1123px). Tràn Trang 2 -> Trang 3.
  * cv-sidebar-green (Kĩ năng) cũng tràn sang trang tiếp theo, không dùng scroll.
  *
- * Build marker: 20260514-9
+ * Build marker: 20260514-37-strict
  */
 (function () {
     if (typeof window !== 'undefined') {
-        window.__CV_EDITOR_BUILD__ = '20260514-9';
+        window.__CV_EDITOR_BUILD__ = '20260514-37-strict';
         try {
             console.log(
                 '%c[cv-editor] build ' + window.__CV_EDITOR_BUILD__,
@@ -39,16 +39,37 @@
     function moveOverflowItemsToPage2() {
         var list1 = document.querySelector(PAGE1_EXP_LIST);
         var list2 = document.querySelector(PAGE2_EXP_LIST);
-        if (!list1 || !list2) return;
+        var content1 = document.querySelector(PAGE1_CONTENT);
+        if (!list1 || !list2) {
+            try { console.warn('[cv-editor] moveOverflowItemsToPage2 ABORT — list1=', !!list1, 'list2=', !!list2); } catch (_) {}
+            return;
+        }
         var maxIter = 50;
+        var moved = 0;
+        var startCount = list1.querySelectorAll(SPLIT_SELECTOR).length;
         while (hasOverflowPage1() && maxIter-- > 0) {
             var items = list1.querySelectorAll(SPLIT_SELECTOR);
             if (items.length === 0) break;
             var lastSplit = items[items.length - 1];
-            list2.insertBefore(lastSplit, list2.firstChild);
-            /* Force reflow để getBoundingClientRect ở vòng kế tiếp đo đúng */
+            try {
+                list2.insertBefore(lastSplit, list2.firstChild);
+                moved++;
+            } catch (e) {
+                try { console.warn('[cv-editor] insertBefore FAILED', e); } catch (_) {}
+                break;
+            }
+            /* Force reflow MULTIPLE elements để getBoundingClientRect ở vòng kế
+               tiếp đo đúng. Browser có thể không reflow .cv-content nếu chỉ
+               touch list1. Đụng vào content + cardInner + body bắt buộc reflow. */
             void list1.offsetHeight;
+            if (content1) void content1.offsetHeight;
+            void document.body.offsetHeight;
         }
+        try {
+            console.log('[cv-editor] moveOverflowItemsToPage2 done — start=' + startCount +
+                ', moved=' + moved + ', remaining=' + list1.querySelectorAll(SPLIT_SELECTOR).length +
+                ', maxIter exhausted=' + (maxIter < 0));
+        } catch (_) {}
     }
 
     function moveOverflowItemsToPage3() {
@@ -206,20 +227,31 @@
         var content = document.querySelector(PAGE1_CONTENT);
         if (!content) return false;
 
-        /* 1) So sánh bounding rect của lastItem so với content.
-           Dùng -2 (thay cho +2 cũ) tăng safety margin: nếu item gần chạm
-           biên dưới (cách <= 2px) cũng coi là overflow để tránh half-line clip
-           do sub-pixel/line-height anti-aliasing. */
+        /* Safety buffer 8px: nếu item nằm trong vùng 8px sát biên dưới cũng
+           coi là tràn. Đảm bảo không bị clip do font metrics khác giữa các
+           môi trường (Live Server, headless, ...) hoặc do line-height
+           anti-aliasing sub-pixel. */
+        var SAFETY_BUFFER = 8;
+
+        /* 1) So sánh bounding rect của lastItem so với content. */
         var list = content.querySelector('.cv-exp-list');
         if (list && list.children.length > 0) {
             var lastItem = list.children[list.children.length - 1];
             var contentRect = content.getBoundingClientRect();
             var lastRect = lastItem.getBoundingClientRect();
-            if (lastRect.bottom > contentRect.bottom - 2) return true;
+            if (lastRect.bottom > contentRect.bottom - SAFETY_BUFFER) return true;
+
+            /* 1b) Quét TẤT CẢ children của list — nếu BẤT KỲ item nào vượt biên,
+               coi là overflow. Đảm bảo bắt được trường hợp middle item bị clip. */
+            for (var k = 0; k < list.children.length; k++) {
+                var anyItem = list.children[k];
+                var anyRect = anyItem.getBoundingClientRect();
+                if (anyRect.bottom > contentRect.bottom - SAFETY_BUFFER) return true;
+            }
         }
 
         /* 2) Fallback dùng scrollHeight vs clientHeight (chuẩn cho overflow:hidden) */
-        if (content.scrollHeight > content.clientHeight + 2) return true;
+        if (content.scrollHeight > content.clientHeight + SAFETY_BUFFER) return true;
 
         /* 3) Fallback v10/v11: inner stack flex column trong .cv-content absolute */
         var stackSelectors = ['.cv-v10-main-stack', '.cv-v11-main-stack'];
@@ -230,9 +262,9 @@
                 var stackRect = stack.getBoundingClientRect();
                 if (cardInner) {
                     var cardRect = cardInner.getBoundingClientRect();
-                    if (stackRect.bottom > cardRect.bottom - 24 - 2) return true;
+                    if (stackRect.bottom > cardRect.bottom - 24 - SAFETY_BUFFER) return true;
                 }
-                if (stack.scrollHeight > content.clientHeight + 2) return true;
+                if (stack.scrollHeight > content.clientHeight + SAFETY_BUFFER) return true;
             }
         }
 
@@ -399,7 +431,11 @@
                     var contentBottom = content1.getBoundingClientRect().bottom;
                     var lastItem = items[items.length - 1];
                     var lastBottom = lastItem.getBoundingClientRect().bottom;
-                    var hasRectOverflow = lastBottom > contentBottom + 0.5;
+                    /* Threshold thoáng hơn 8px — đảm bảo move bất kỳ item nào gần
+                       chạm biên dưới, tránh half-line clip do sub-pixel rounding
+                       hoặc font metrics khác biệt giữa môi trường (Live Server,
+                       headless Chrome, v.v.). */
+                    var hasRectOverflow = lastBottom > contentBottom - 8;
                     var hasScrollOverflow = content1.scrollHeight > content1.clientHeight + 1;
                     if (hasRectOverflow || hasScrollOverflow) {
                         list2.insertBefore(lastItem, list2.firstChild);
@@ -428,7 +464,7 @@
                     var contentBottom2 = content2.getBoundingClientRect().bottom;
                     var lastItem2 = items2[items2.length - 1];
                     var lastBottom2 = lastItem2.getBoundingClientRect().bottom;
-                    var hasRectOverflow2 = lastBottom2 > contentBottom2 + 0.5;
+                    var hasRectOverflow2 = lastBottom2 > contentBottom2 - 8;
                     var hasScrollOverflow2 = content2.scrollHeight > content2.clientHeight + 1;
                     if (hasRectOverflow2 || hasScrollOverflow2) {
                         list3.insertBefore(lastItem2, list3.firstChild);
@@ -499,6 +535,94 @@
         }
     }
 
+    /**
+     * BRUTE-FORCE overflow handler — bypass mọi detection logic phức tạp.
+     * Đo TRỰC TIẾP bounding rect của từng exp-item-split, item nào có
+     * bottom > content.bottom (strict, không buffer) thì FORCE-MOVE sang
+     * page kế tiếp. Chỉ move item KHI CHẮC CHẮN vượt biên (>= 1px) để tránh
+     * false positive với items vừa-suýt-soát-fit.
+     */
+    function bruteForceMoveOverflow() {
+        try {
+            var wrapper = document.querySelector(WRAPPER);
+            if (!wrapper) return;
+
+            /* Force complete reflow trước khi đo bằng cách touch nhiều element */
+            void document.body.offsetHeight;
+
+            /* Page 1 → Page 2 — chuyển BẤT KỲ item nào có bottom vượt biên content.
+               Threshold = +0.5px để chỉ move khi thực sự overflow (không phải khi
+               vừa-chạm-biên fits). */
+            var content1 = document.querySelector(PAGE1_CONTENT);
+            var list1 = document.querySelector(PAGE1_EXP_LIST);
+            var list2 = document.querySelector(PAGE2_EXP_LIST);
+            if (content1 && list1 && list2) {
+                var contentBottom = content1.getBoundingClientRect().bottom;
+                var items = Array.prototype.slice.call(list1.querySelectorAll(SPLIT_SELECTOR));
+                /* Tìm INDEX đầu tiên mà item.bottom THỰC SỰ vượt biên */
+                var firstOverflowIdx = -1;
+                for (var i = 0; i < items.length; i++) {
+                    var rect = items[i].getBoundingClientRect();
+                    if (rect.bottom > contentBottom + 0.5) {
+                        firstOverflowIdx = i;
+                        break;
+                    }
+                }
+                /* Nếu phát hiện overflow — KEEP item đầu trên page 1 (không thể
+                   move hết), chuyển tất cả từ index max(1, firstOverflowIdx) trở
+                   đi sang page 2. */
+                if (firstOverflowIdx >= 0) {
+                    var startMoveIdx = Math.max(1, firstOverflowIdx);
+                    var movedCount = 0;
+                    for (var j = items.length - 1; j >= startMoveIdx; j--) {
+                        list2.insertBefore(items[j], list2.firstChild);
+                        movedCount++;
+                    }
+                    if (movedCount > 0) {
+                        wrapper.classList.add('cv-has-page2');
+                        try {
+                            console.log('[cv-editor] bruteForce p1→p2 moved ' + movedCount +
+                                ' item(s) starting at idx ' + startMoveIdx +
+                                ' (contentBottom=' + Math.round(contentBottom) + ')');
+                        } catch (_) {}
+                    }
+                }
+            }
+
+            /* Page 2 → Page 3 — tương tự */
+            var content2 = document.querySelector(PAGE2_CONTENT);
+            var list3 = document.querySelector(PAGE3_EXP_LIST);
+            if (content2 && list2 && list3) {
+                var contentBottom2 = content2.getBoundingClientRect().bottom;
+                var items2 = Array.prototype.slice.call(list2.querySelectorAll(SPLIT_SELECTOR));
+                var firstOverflowIdx2 = -1;
+                for (var k = 0; k < items2.length; k++) {
+                    var rect2 = items2[k].getBoundingClientRect();
+                    if (rect2.bottom > contentBottom2 + 0.5) {
+                        firstOverflowIdx2 = k;
+                        break;
+                    }
+                }
+                if (firstOverflowIdx2 >= 0) {
+                    var startMoveIdx2 = Math.max(1, firstOverflowIdx2);
+                    var movedCount2 = 0;
+                    for (var m = items2.length - 1; m >= startMoveIdx2; m--) {
+                        list3.insertBefore(items2[m], list3.firstChild);
+                        movedCount2++;
+                    }
+                    if (movedCount2 > 0) {
+                        wrapper.classList.add('cv-has-page3');
+                        try {
+                            console.log('[cv-editor] bruteForce p2→p3 moved ' + movedCount2 + ' item(s)');
+                        } catch (_) {}
+                    }
+                }
+            }
+        } catch (e) {
+            try { console.warn('[cv-editor] bruteForceMoveOverflow error', e); } catch (_) {}
+        }
+    }
+
     function init() {
         // Chạy sau khi layout ổn định (double rAF)
         requestAnimationFrame(function () {
@@ -506,6 +630,21 @@
                 checkOverflow(true);
             });
         });
+
+        /* Chạy lại sau khi fonts load xong — bullet text với font Inter có metrics
+           khác nhau giữa fallback và font thực, ảnh hưởng line-height → overflow
+           detection phải re-run sau font load để tránh sai phép đo lần đầu. */
+        if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+            document.fonts.ready.then(function () {
+                requestAnimationFrame(function () {
+                    checkOverflow(true);
+                    failsafeMoveOverflow();
+                    bruteForceMoveOverflow();
+                    updateEmptyClasses();
+                });
+            });
+        }
+
         window.addEventListener('load', function () {
             requestAnimationFrame(function () {
                 checkOverflow(true);
@@ -520,9 +659,14 @@
             setTimeout(function () { checkOverflow(true); }, 1500);
             setTimeout(function () { checkOverflow(true); }, 2500);
             setTimeout(function () { checkOverflow(true); }, 3000);
-            /* Failsafe pass riêng — chạy sau cùng khi font/image đã settle hoàn toàn */
-            setTimeout(function () { failsafeMoveOverflow(); updateEmptyClasses(); }, 4000);
-            setTimeout(function () { failsafeMoveOverflow(); updateEmptyClasses(); }, 5500);
+            /* Failsafe + bruteForce pass — chạy sau cùng khi font/image đã settle */
+            setTimeout(function () { failsafeMoveOverflow(); bruteForceMoveOverflow(); updateEmptyClasses(); }, 1200);
+            setTimeout(function () { failsafeMoveOverflow(); bruteForceMoveOverflow(); updateEmptyClasses(); }, 2200);
+            setTimeout(function () { failsafeMoveOverflow(); bruteForceMoveOverflow(); updateEmptyClasses(); }, 4000);
+            setTimeout(function () { failsafeMoveOverflow(); bruteForceMoveOverflow(); updateEmptyClasses(); }, 5500);
+            /* Long-tail — bắt edge case khi font/image load chậm hoặc layout shift muộn */
+            setTimeout(function () { bruteForceMoveOverflow(); updateEmptyClasses(); }, 8000);
+            setTimeout(function () { bruteForceMoveOverflow(); updateEmptyClasses(); }, 12000);
         });
 
         var wrapper = document.querySelector(WRAPPER);

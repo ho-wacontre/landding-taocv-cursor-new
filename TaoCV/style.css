@@ -24,7 +24,7 @@
     --white: #ffffff;
     /* Character (text) - Figma */
     --char-primary-85: rgba(0, 0, 0, 0.85);
-    --char-secondary-45: rgba(0, 0, 0, 0.45);
+    --char-secondary-45: rgba(0, 0, 0, 0.45); 
     /* Radius - Figma */
     --radius: 4px;
     --radius-md: 6px;
