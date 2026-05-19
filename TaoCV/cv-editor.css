@@ -286,7 +286,7 @@
 .cv-info-list li svg,
 .cv-info-list li .cv-info-icon {
     flex-shrink: 0;
-    color: #333;
+    color: var(--yellow-300);
 }
 
 /* Green sidebar section - giới hạn chiều cao trong cv-card-inner, không scroll, overflow -> trang 2 */
