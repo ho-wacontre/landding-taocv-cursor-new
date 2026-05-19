@@ -289,13 +289,6 @@
     color: var(--yellow-300);
 }
 
-/* Inline SVG dùng currentColor sẽ inherit `color` ở trên.
-   IMG-loaded SVG cần filter để recolor — convert sang yellow-300 #FACA15. */
-.cv-info-list li .cv-info-icon img,
-.cv-info-list li img.cv-info-icon {
-    filter: brightness(0) saturate(100%) invert(77%) sepia(57%) saturate(1264%) hue-rotate(3deg) brightness(103%) contrast(95%);
-}
-
 /* Green sidebar section - giới hạn chiều cao trong cv-card-inner, không scroll, overflow -> trang 2 */
 .cv-sidebar-green {
     flex: 1;
@@ -1054,10 +1047,17 @@
     color: #fff;
 }
 
-/* SVG icon được load qua <img src> nên CSS `color` không có hiệu lực.
-   Dùng filter để convert SVG (gốc currentColor/black) sang yellow-300 #FACA15. */
 .cv-info-list-on-dark .cv-info-icon {
-    filter: brightness(0) saturate(100%) invert(77%) sepia(57%) saturate(1264%) hue-rotate(3deg) brightness(103%) contrast(95%);
+    filter: brightness(0) invert(1);
+}
+
+/* CV Template item 3 — đổi icon thông tin cá nhân (phone/email/gender/cake/
+   map-pin) từ trắng sang vàng yellow-300 #FACA15. Vì các icon được include
+   bằng <img src="*.svg">, CSS `color`/`fill` không có tác dụng — dùng filter
+   chain để recolor: brightness(0) saturate(100%) đưa về solid black, rồi áp
+   invert/sepia/saturate/hue-rotate để ra đúng #FACA15. */
+.cv-template-v3 .cv-info-list-on-dark .cv-info-icon {
+    filter: brightness(0) saturate(100%) invert(78%) sepia(86%) saturate(1726%) hue-rotate(2deg) brightness(101%) contrast(101%);
 }
 
 .cv-v3-columns {
